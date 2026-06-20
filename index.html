@@ -3,299 +3,366 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMK Mutiara 1 Bandung – Cetak Generasi Unggul</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>SMK Mutiara 1 Bandung – SPMB 2025/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --navy: #1B2B4B;
-    --navy-mid: #243560;
-    --navy-light: #2E4080;
-    --gold: #C9913A;
-    --gold-light: #E5B55A;
-    --gold-pale: #F5E6C8;
-    --cream: #F8F5EE;
-    --white: #FFFFFF;
-    --text-dark: #0D1B2A;
-    --text-mid: #3A4A5C;
-    --text-soft: #6B7A8D;
+    --blue:       #1A56DB;
+    --blue-dark:  #0a1b4d;
+    --blue-mid:   #2563EB;
+    --sky:        #38BDF8;
+    --sky-light:  #7DD3FC;
+    --green:      #10B981;
+    --green-light:#34D399;
+    --orange:     #F97316;
+    --purple:     #7C3AED;
+    --bg:         #F4F9FF;
+    --white:      #FFFFFF;
+    --text:       #0F172A;
+    --text-mid:   #334155;
+    --text-soft:  #64748B;
+    --border:     rgba(26,86,219,0.12);
   }
 
   html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
+  /* ── ANIMATIONS ── */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
+  @keyframes float { 
+    0%, 100% { transform: translateY(0px) rotate(0deg); } 
+    50% { transform: translateY(-15px) rotate(3deg); } 
+  }
+  @keyframes blob-bounce {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+  @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+  
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
 
   /* ── NAVBAR ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 72px;
-    background: rgba(27, 43, 75, 0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,145,58,0.2);
-    transition: all 0.3s;
+    padding: 0 5%; height: 76px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
   }
   .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo { width: 40px; height: 40px; object-fit: contain; }
-  .nav-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.2; }
-  .nav-name span { display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.65rem; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-logo { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(26,86,219,0.2)); }
+  .nav-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 800; color: var(--blue-dark); line-height: 1.1; }
+  .nav-name span { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.65rem; color: var(--blue); letter-spacing: 0.16em; text-transform: uppercase; background: linear-gradient(90deg, var(--blue), var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .nav-links { display: flex; gap: 32px; }
-  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 0.88rem; font-weight: 600; position: relative; transition: color 0.3s; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0%; height: 2px; background: var(--blue); transition: width 0.3s ease; border-radius: 2px; }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-links a:hover::after { width: 100%; }
+  
   .nav-cta {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--navy);
-    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.06em;
+    background: linear-gradient(135deg, var(--blue), var(--blue-mid)); color: #fff;
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.06em;
     text-transform: uppercase; text-decoration: none;
-    padding: 10px 24px; border-radius: 6px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 12px 28px; border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(26,86,219,0.3);
+    position: relative; overflow: hidden;
   }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,145,58,0.4); }
+  .nav-cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+  .nav-cta:hover::before { left: 100%; }
+  .nav-cta:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 25px rgba(26,86,219,0.4); }
 
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3560 100%);
+    background: linear-gradient(-45deg, #0a1b4d, #1A56DB, #7C3AED, #0EA5E9);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
-    padding: 100px 5% 60px;
+    padding: 120px 5% 80px;
+    text-align: center;
+    z-index: 1;
   }
-  .hero-bg-pattern {
-    position: absolute; inset: 0; opacity: 0.04;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px),
-                      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px);
+  .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.6; animation: blob-bounce 20s infinite alternate; }
+  .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #38BDF8; border-radius: 50%; }
+  .blob-2 { bottom: -20%; right: -10%; width: 600px; height: 600px; background: #7C3AED; border-radius: 50%; animation-delay: -5s; }
+  .blob-3 { top: 40%; left: 50%; width: 400px; height: 400px; background: #10B981; border-radius: 50%; animation-delay: -10s; }
+
+  .hero-dots {
+    position: absolute; inset: 0; opacity: 0.15;
+    background-image: radial-gradient(circle, #fff 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
+    z-index: 0; pointer-events: none;
   }
-  .hero-glow {
-    position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,145,58,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-content { position: relative; text-align: center; max-width: 800px; }
+  .hero-content { position: relative; z-index: 2; max-width: 850px; margin: 0 auto; }
+
   .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(201,145,58,0.15); border: 1px solid rgba(201,145,58,0.4);
-    color: var(--gold-light); font-size: 0.72rem; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 0.75rem; font-weight: 700;
     letter-spacing: 0.12em; text-transform: uppercase;
-    padding: 7px 18px; border-radius: 100px; margin-bottom: 28px;
+    padding: 8px 24px; border-radius: 100px; margin-bottom: 32px;
+    backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   }
-  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-badge span { width: 8px; height: 8px; border-radius: 50%; background: #34D399; display: inline-block; animation: blink 1.5s infinite; box-shadow: 0 0 10px #34D399; }
 
-  .hero-logo { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 24px; filter: drop-shadow(0 8px 32px rgba(201,145,58,0.3)); animation: floatLogo 4s ease-in-out infinite; }
-  @keyframes floatLogo { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .hero-logo {
+    width: 130px; height: 130px; object-fit: contain;
+    margin: 0 auto 28px; display: block;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+    animation: float 5s ease-in-out infinite;
+  }
 
-  .hero-school { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 12px; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; color: var(--sky-light); text-transform: uppercase; margin-bottom: 16px; font-weight: 700; }
+
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 900; line-height: 1.05;
-    color: var(--white); margin-bottom: 20px;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 24px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.2);
   }
-  .hero-title em { font-style: normal; color: var(--gold-light); }
-  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; }
+  .hero-title em { font-style: normal; background: linear-gradient(to right, #7DD3FC, #E0E7FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+  .hero-sub { font-size: 1.15rem; color: rgba(255,255,255,0.85); line-height: 1.8; max-width: 600px; margin: 0 auto 50px; font-weight: 400; }
+
+  .hero-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
   .btn-primary {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--navy); font-weight: 700; font-size: 0.9rem;
-    padding: 16px 36px; border-radius: 8px; text-decoration: none;
-    transition: all 0.25s; box-shadow: 0 4px 24px rgba(201,145,58,0.35);
-    letter-spacing: 0.03em;
+    background: #fff; color: var(--blue-dark);
+    font-weight: 800; font-size: 0.95rem; letter-spacing: 0.03em;
+    padding: 16px 40px; border-radius: 50px; text-decoration: none;
+    transition: all 0.3s; box-shadow: 0 10px 30px rgba(255,255,255,0.2);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,145,58,0.5); }
-  .btn-outline {
-    border: 1.5px solid rgba(255,255,255,0.35); color: var(--white);
-    font-size: 0.9rem; font-weight: 500;
-    padding: 15px 32px; border-radius: 8px; text-decoration: none;
-    transition: all 0.25s;
+  .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(255,255,255,0.3); background: #F8FAFC; }
+  
+  .btn-glass {
+    background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
+    font-size: 0.95rem; font-weight: 700;
+    padding: 16px 40px; border-radius: 50px; text-decoration: none;
+    transition: all 0.3s; backdrop-filter: blur(10px);
   }
-  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); background: rgba(201,145,58,0.08); }
+  .btn-glass:hover { background: rgba(255,255,255,0.2); border-color: #fff; transform: translateY(-4px); }
 
-  /* ── STATS ── */
-  .hero-stats { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
-  .stat { text-align: center; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; }
-  .stat-num span { color: var(--gold-light); }
-  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+  /* ── WAVE ── */
+  .wave-divider { position: relative; width: 100%; overflow: hidden; line-height: 0; z-index: 3; }
+  .wave-divider svg { position: relative; display: block; width: calc(100% + 1.3px); height: 80px; }
+  .wave-top { margin-top: -1px; }
 
-  /* ── WAVE DIVIDER ── */
-  .wave { line-height: 0; }
-  .wave svg { display: block; }
+  /* ── SHARED SECTION ── */
+  .section { padding: 120px 5%; position: relative; }
+  .section-label { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; color: var(--blue); text-transform: uppercase; margin-bottom: 16px; padding: 6px 16px; background: rgba(26,86,219,0.08); border-radius: 100px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 20px; }
+  .section-desc { font-size: 1.05rem; color: var(--text-soft); line-height: 1.8; max-width: 600px; margin-bottom: 0; }
 
-  /* ── JURUSAN SECTION ── */
-  .section { padding: 100px 5%; }
-  .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 16px; }
-  .section-desc { font-size: 1rem; color: var(--text-soft); max-width: 520px; line-height: 1.75; }
-
-  .jurusan-section { background: var(--white); }
-  .jurusan-header { text-align: center; margin-bottom: 64px; }
-  .jurusan-header .section-desc { margin: 0 auto; }
-
-  .jurusan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  /* ── JURUSAN ── */
+  .jurusan-section { background: var(--bg); }
+  .jurusan-header { text-align: center; margin-bottom: 70px; display: flex; flex-direction: column; align-items: center; }
+  .jurusan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1250px; margin: 0 auto; }
 
   .jurusan-card {
-    background: var(--cream);
-    border-radius: 16px;
-    padding: 36px 28px;
-    position: relative; overflow: hidden;
-    border: 1px solid rgba(27,43,75,0.08);
-    cursor: pointer;
-    transition: transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s;
-    transform-style: preserve-3d;
+    background: #fff; border: 1px solid rgba(0,0,0,0.04);
+    border-radius: 24px; padding: 40px 30px;
+    position: relative; overflow: hidden; cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
   }
-  .jurusan-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 60px rgba(27,43,75,0.15); }
   .jurusan-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.35s ease;
+    content: ''; position: absolute; inset: 0; border-radius: 24px;
+    padding: 2px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; pointer-events: none;
   }
-  .jurusan-card:hover::before { transform: scaleX(1); }
+  .jurusan-card:hover { transform: translateY(-12px); box-shadow: 0 25px 60px rgba(26,86,219,0.08); }
 
-  .jurusan-icon {
-    width: 64px; height: 64px; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; margin-bottom: 24px;
-    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-  }
-  .jurusan-code { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
-  .jurusan-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
-  .jurusan-desc { font-size: 0.85rem; color: var(--text-soft); line-height: 1.65; margin-bottom: 24px; }
-  .jurusan-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-size: 0.68rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(27,43,75,0.07); color: var(--navy); letter-spacing: 0.04em; }
-  .jurusan-arrow { position: absolute; bottom: 28px; right: 28px; color: var(--gold); opacity: 0; transform: translateX(-6px); transition: all 0.25s; font-size: 1.2rem; }
-  .jurusan-card:hover .jurusan-arrow { opacity: 1; transform: translateX(0); }
+  .jurusan-stripe { position: absolute; top: 0; left: 0; right: 0; height: 6px; transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+  .jurusan-card:hover .jurusan-stripe { transform: scaleX(1); }
+  .stripe-orange { background: linear-gradient(90deg, #F97316, #FBBF24); }
+  .stripe-blue   { background: linear-gradient(90deg, #1A56DB, #38BDF8); }
+  .stripe-green  { background: linear-gradient(90deg, #10B981, #34D399); }
+  .stripe-purple { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+
+  .jurusan-icon-wrap { width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 28px; transition: transform 0.4s ease; box-shadow: inset 0 0 20px rgba(255,255,255,0.5); }
+  .jurusan-card:hover .jurusan-icon-wrap { transform: scale(1.1) rotate(5deg); }
+  .icon-orange { background: linear-gradient(135deg, #FFF7ED, #FFEDD5); }
+  .icon-blue   { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+  .icon-green  { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); }
+  .icon-purple { background: linear-gradient(135deg, #F5F3FF, #EDE9FE); }
+
+  .jurusan-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+  .jurusan-desc { font-size: 0.9rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 24px; }
+  .jurusan-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 0.7rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; letter-spacing: 0.05em; }
+  .tag-orange { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
+  .tag-blue   { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+  .tag-green  { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+  .tag-purple { background: #F5F3FF; color: #5B21B6; border: 1px solid #DDD6FE; }
+  
+  .jurusan-arrow { position: absolute; bottom: 35px; right: 30px; width: 40px; height: 40px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateX(-15px); transition: all 0.4s; font-weight: bold; color: var(--blue); }
+  .jurusan-card:hover .jurusan-arrow { opacity: 1; transform: translateX(0); background: var(--blue); color: #fff; box-shadow: 0 4px 15px rgba(26,86,219,0.3); }
 
   /* ── KEUNGGULAN ── */
-  .keunggulan-section { background: var(--navy); }
-  .keunggulan-section .section-title { color: var(--white); }
-  .keunggulan-section .section-label { color: var(--gold-light); }
-  .keunggulan-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  @media(max-width:768px){.keunggulan-inner{grid-template-columns:1fr;gap:40px}}
+  .keunggulan-section { background: #0a1b4d; position: relative; overflow: hidden; }
+  .keunggulan-section::before { content: ''; position: absolute; top: 0; right: 0; width: 50vw; height: 100%; background: linear-gradient(90deg, transparent, rgba(26,86,219,0.2)); clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%); pointer-events: none; }
+  
+  .keunggulan-section .section-title { color: #fff; }
+  .keunggulan-section .section-label { color: #fff; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+  .keunggulan-section .section-desc { color: rgba(255,255,255,0.7); }
 
-  .keunggulan-list { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
-  .keunggulan-item { display: flex; gap: 18px; align-items: flex-start; }
-  .keunggulan-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: rgba(201,145,58,0.25); line-height: 1; min-width: 40px; }
-  .keunggulan-body h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .keunggulan-body p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .keunggulan-inner { position: relative; z-index: 2; max-width: 1250px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+  @media(max-width:992px){.keunggulan-inner{grid-template-columns:1fr;gap:50px}}
 
-  .keunggulan-cards { display: flex; flex-direction: column; gap: 16px; }
+  .keunggulan-list { margin-top: 40px; display: flex; flex-direction: column; gap: 30px; }
+  .keunggulan-item { display: flex; gap: 20px; align-items: flex-start; padding: 20px; border-radius: 20px; transition: background 0.3s; }
+  .keunggulan-item:hover { background: rgba(255,255,255,0.05); }
+  .keunggulan-check { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #10B981, #34D399); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #fff; font-size: 1rem; font-weight: 900; box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+  .keunggulan-body h4 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; letter-spacing: 0.02em; }
+  .keunggulan-body p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+  .keunggulan-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; position: relative; }
+  .keunggulan-cards::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, transparent 60%); z-index: -1; filter: blur(40px); }
   .k-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px; padding: 24px;
-    transition: background 0.25s, border-color 0.25s;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px; padding: 30px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    transition: all 0.4s ease;
   }
-  .k-card:hover { background: rgba(201,145,58,0.1); border-color: rgba(201,145,58,0.3); }
-  .k-card-icon { font-size: 1.5rem; margin-bottom: 10px; }
-  .k-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
-  .k-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+  .k-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.08); border-color: rgba(56,189,248,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  .k-card-icon { font-size: 2.2rem; margin-bottom: 16px; background: linear-gradient(135deg, var(--sky), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 5px rgba(56,189,248,0.4)); }
+  .k-card h4 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .k-card p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
 
-  /* ── TESTIMONIAL ── */
-  .testi-section { background: var(--cream); }
-  .testi-header { text-align: center; margin-bottom: 60px; }
-  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
-  .testi-card {
-    background: var(--white); border-radius: 16px; padding: 32px;
-    border: 1px solid rgba(27,43,75,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
+  /* ── ALUR SPMB ── */
+  .alur-section { background: #fff; }
+  .alur-header { text-align: center; margin-bottom: 80px; display: flex; flex-direction: column; align-items: center; }
+
+  .alur-steps { display: flex; justify-content: space-between; position: relative; max-width: 1200px; margin: 0 auto; z-index: 1; }
+  .alur-line { position: absolute; top: 35px; left: 5%; right: 5%; height: 2px; background: linear-gradient(90deg, rgba(26,86,219,0.1) 50%, transparent 50%); background-size: 20px 2px; z-index: -1; }
+  .alur-step { flex: 1; text-align: center; padding: 0 15px; }
+  
+  .alur-num {
+    width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 20px;
+    background: #fff; border: 2px solid var(--blue);
+    color: var(--blue); font-weight: 900; font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 6px rgba(26,86,219,0.1);
+    transition: all 0.4s ease; position: relative;
   }
-  .testi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,43,75,0.1); }
-  .testi-quote { font-size: 2rem; color: var(--gold); line-height: 1; margin-bottom: 16px; }
-  .testi-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
-  .testi-author { display: flex; align-items: center; gap: 12px; }
-  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--gold)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
-  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
-  .testi-role { font-size: 0.75rem; color: var(--text-soft); }
+  .alur-step:hover .alur-num { background: linear-gradient(135deg, var(--blue), var(--sky)); color: #fff; border-color: transparent; box-shadow: 0 10px 25px rgba(26,86,219,0.4); transform: scale(1.1); }
+  
+  .alur-step h4 { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+  .alur-step p { font-size: 0.85rem; color: var(--text-soft); line-height: 1.6; }
+  @media(max-width:768px){
+    .alur-steps { flex-direction: column; gap: 40px; }
+    .alur-line { top: 0; bottom: 0; left: 50%; width: 2px; height: 100%; background: linear-gradient(180deg, rgba(26,86,219,0.1) 50%, transparent 50%); background-size: 2px 20px; transform: translateX(-50%); }
+  }
+
+  /* ── TESTIMONI ── */
+  .testi-section { background: var(--bg); }
+  .testi-header { text-align: center; margin-bottom: 70px; display: flex; flex-direction: column; align-items: center; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+  .testi-card {
+    background: #fff; border-radius: 24px; padding: 40px;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    position: relative; transition: all 0.4s;
+  }
+  .testi-card::after { content: '”'; position: absolute; top: 10px; right: 30px; font-family: 'Playfair Display', serif; font-size: 6rem; color: rgba(26,86,219,0.05); line-height: 1; pointer-events: none; transition: color 0.4s; }
+  .testi-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(26,86,219,0.08); }
+  .testi-card:hover::after { color: rgba(26,86,219,0.15); }
+  .testi-stars { color: #F59E0B; font-size: 1rem; margin-bottom: 20px; letter-spacing: 3px; display: flex; gap: 2px; }
+  .testi-text { font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 30px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 16px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 20px; }
+  .testi-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1.1rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+  .av-blue { background: linear-gradient(135deg, #1A56DB, #38BDF8); }
+  .av-green { background: linear-gradient(135deg, #10B981, #34D399); }
+  .av-orange { background: linear-gradient(135deg, #F97316, #FBBF24); }
+  .testi-name { font-weight: 800; font-size: 1rem; color: var(--text); }
+  .testi-role { font-size: 0.8rem; color: var(--text-soft); margin-top: 4px; font-weight: 500; }
 
   /* ── CTA SPMB ── */
   .spmb-section {
-    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
-    padding: 100px 5%; text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(-45deg, #0F2B7A, #1A56DB, #0EA5E9, #10B981);
+    background-size: 300% 300%; animation: gradientBG 10s ease infinite;
+    padding: 120px 5%; text-align: center; position: relative; overflow: hidden;
   }
   .spmb-section::before {
-    content: ''; position: absolute; top: -50%; left: -20%; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,145,58,0.15) 0%, transparent 70%);
-    pointer-events: none;
+    content: ''; position: absolute; inset: 0; opacity: 0.2;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
-  .spmb-section::after {
-    content: ''; position: absolute; bottom: -50%; right: -20%; width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(201,145,58,0.1) 0%, transparent 70%);
-    pointer-events: none;
+  .spmb-inner { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 60px 40px; border-radius: 30px; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+  
+  .spmb-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 900; color: #fff; margin-bottom: 20px; line-height: 1.15; }
+  .spmb-title span { background: linear-gradient(to right, #7DD3FC, #34D399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .spmb-desc { color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.8; margin-bottom: 40px; }
+  .spmb-actions { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  
+  .btn-wa {
+    background: linear-gradient(135deg, #25D366, #128C7E); color: #fff;
+    font-weight: 800; font-size: 0.95rem;
+    padding: 16px 36px; border-radius: 50px; text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s; box-shadow: 0 10px 25px rgba(37,211,102,0.4);
   }
-  .spmb-inner { position: relative; max-width: 680px; margin: 0 auto; }
-  .spmb-section .section-label { color: var(--gold-light); text-align: center; }
-  .spmb-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
-  .spmb-title span { color: var(--gold-light); }
-  .spmb-desc { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.7; margin-bottom: 40px; }
-  .spmb-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-  .spmb-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  .btn-wa:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(37,211,102,0.5); }
+  
+  .spmb-info { display: flex; flex-direction: column; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 16px; }
+  .spmb-info-item { color: #fff; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; font-weight: 500; }
 
   /* ── FOOTER ── */
-  footer {
-    background: #0D1B2A; padding: 60px 5% 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-  @media(max-width:768px){.footer-inner{grid-template-columns:1fr;gap:32px}}
-  .footer-brand { display: flex; align-items: flex-start; gap: 14px; }
-  .footer-logo { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
-  .footer-school { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--white); }
-  .footer-school span { display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
-  .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.65; margin-top: 12px; }
-  .footer-col h5 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col ul li a { font-size: 0.84rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
-  .footer-col ul li a:hover { color: var(--gold-light); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
-  .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+  footer { background: #050d26; padding: 80px 5% 30px; position: relative; border-top: 4px solid var(--blue); }
+  .footer-inner { max-width: 1250px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+  @media(max-width:768px){.footer-inner{grid-template-columns:1fr;gap:40px}}
+  
+  .footer-brand { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+  .footer-logo { width: 56px; height: 56px; object-fit: contain; filter: brightness(0) invert(1); }
+  .footer-school-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 800; color: #fff; line-height: 1.1; }
+  .footer-school-name span { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem; color: var(--sky); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px; }
+  
+  .footer-address { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 16px; max-width: 350px; }
+  .footer-col h5 { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; font-weight: 700; margin-bottom: 24px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .footer-col ul li a { font-size: 0.9rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; position: relative; padding-left: 0; }
+  .footer-col ul li a::before { content: '→'; position: absolute; left: -15px; opacity: 0; transition: all 0.3s; color: var(--sky); }
+  .footer-col ul li a:hover { color: var(--sky); padding-left: 15px; }
+  .footer-col ul li a:hover::before { opacity: 1; left: 0; }
+  
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  .footer-copy { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
   .footer-socials { display: flex; gap: 12px; }
-  .social-btn {
-    width: 36px; height: 36px; border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.12);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem; color: rgba(255,255,255,0.4);
-    text-decoration: none; transition: all 0.2s;
-  }
-  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .social-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 700; color: #fff; text-decoration: none; transition: all 0.3s; }
+  .social-btn:hover { background: var(--blue); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(26,86,219,0.4); }
 
-  /* ── WHATSAPP FLOAT ── */
+  /* ── WA FLOAT ── */
   .wa-float {
-    position: fixed; bottom: 28px; right: 28px; z-index: 99;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #25D366; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    text-decoration: none; transition: transform 0.25s;
-    animation: waBounce 3s ease-in-out infinite;
+    position: fixed; bottom: 30px; right: 30px; z-index: 99;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 25px rgba(37,211,102,0.4); text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  .wa-float:hover { transform: scale(1.1); }
-  @keyframes waBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-  .wa-float svg { width: 28px; height: 28px; fill: white; }
+  .wa-float::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid #25D366; opacity: 0; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  @keyframes ping { 75%, 100% { transform: scale(1.5); opacity: 0; } }
+  .wa-float:hover { transform: scale(1.15) rotate(-5deg); }
+  .wa-float svg { width: 32px; height: 32px; fill: #fff; }
 
-  /* ── RESPONSIVE ── */
-  @media(max-width:768px){
-    .nav-links { display: none; }
-    .hero-stats { gap: 28px; }
-    .stat-num { font-size: 1.8rem; }
-    .jurusan-grid { grid-template-columns: 1fr; }
-    .testi-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── SCROLL ANIMATIONS ── */
-  .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(.22,.68,0,1); }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up:nth-child(2){transition-delay:0.1s}
-  .fade-up:nth-child(3){transition-delay:0.2s}
-  .fade-up:nth-child(4){transition-delay:0.3s}
+  @media(max-width:768px){ .nav-links{display:none} }
 </style>
 </head>
 <body>
@@ -303,258 +370,267 @@
 <!-- NAVBAR -->
 <nav>
   <a href="#" class="nav-brand">
-    <img src="images.jpg" alt="Logo SMK Mutiara 1" class="nav-logo">
-    <div class="nav-name">
-      SMK Mutiara 1
-      <span>Bandung</span>
-    </div>
+    <img src="logo.jpg" alt="Logo SMK Mutiara 1" class="nav-logo">
+    <div class="nav-name">SMK Mutiara 1<span>Bandung</span></div>
   </a>
   <div class="nav-links">
-    <a href="#jurusan">Jurusan</a>
+    <a href="#jurusan">Program Keahlian</a>
     <a href="#keunggulan">Keunggulan</a>
+    <a href="#alur">Alur Daftar</a>
     <a href="#testimoni">Alumni</a>
-    <a href="#spmb">SPMB</a>
   </div>
-  <a href="#spmb" class="nav-cta">Daftar Sekarang</a>
+  <a href="#spmb" class="nav-cta">Daftar SPMB 2025</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-pattern"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-dots"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  
   <div class="hero-content">
-    <div class="hero-badge">Seleksi Penerimaan Murid Baru 2025/2026</div>
-    <img src="images.jpg" alt="Logo SMK Mutiara 1 Bandung" class="hero-logo">
-    <p class="hero-school">SMK Mutiara 1 Bandung</p>
-    <h1 class="hero-title">
-      Cetak <em>Generasi</em><br>Unggul &amp; Siap Kerja
-    </h1>
-    <p class="hero-sub">
-      Sekolah menengah kejuruan unggulan di Bandung dengan 4 program keahlian pilihan, fasilitas modern, dan sertifikasi kompetensi nasional.
-    </p>
-    <div class="hero-actions">
-      <a href="#spmb" class="btn-primary">Daftar SPMB Sekarang</a>
-      <a href="#jurusan" class="btn-outline">Lihat Program Jurusan</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num"><span id="cnt1">0</span>+</div>
-        <div class="stat-label">Tahun Pengalaman</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span id="cnt2">0</span></div>
-        <div class="stat-label">Program Keahlian</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span id="cnt3">0</span>+</div>
-        <div class="stat-label">Alumni Berprestasi</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><span id="cnt4">0</span>+</div>
-        <div class="stat-label">Sertifikasi Kompetensi</div>
-      </div>
+    <div class="hero-badge fade-up"><span></span> Pendaftaran Gelombang 1 Dibuka</div>
+    <img src="logo.jpg" alt="Logo SMK Mutiara 1 Bandung" class="hero-logo fade-up delay-1">
+    <p class="hero-eyebrow fade-up delay-1">Sekolah Menengah Kejuruan Mutiara 1</p>
+    <h1 class="hero-title fade-up delay-2">Wujudkan Karier<br><em>Masa Depanmu</em> Bersama Kami</h1>
+    <p class="hero-sub fade-up delay-3">Pilih jurusan terbaik, raih sertifikasi kompetensi industri, dan jadilah lulusan siap kerja di era digital.</p>
+    <div class="hero-actions fade-up delay-4">
+      <a href="#spmb" class="btn-primary">Daftar Sekarang</a>
+      <a href="#jurusan" class="btn-glass">Jelajahi Jurusan</a>
     </div>
   </div>
 </section>
 
-<div class="wave">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
-    <path d="M0,60 C360,0 1080,80 1440,20 L1440,60 Z" fill="#ffffff"/>
+<div class="wave-divider wave-top">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,80 C360,0 1080,80 1440,0 L1440,80 Z" fill="#F4F9FF"/>
   </svg>
 </div>
 
 <!-- JURUSAN -->
 <section class="section jurusan-section" id="jurusan">
-  <div class="jurusan-header">
-    <p class="section-label">Program Keahlian</p>
-    <h2 class="section-title">4 Jurusan<br>Pilihan Terbaik</h2>
-    <p class="section-desc">Setiap jurusan dirancang dengan kurikulum berbasis industri dan didukung oleh pengajar berpengalaman.</p>
+  <div class="jurusan-header fade-up">
+    <span class="section-label">Program Keahlian</span>
+    <h2 class="section-title">4 Jurusan Unggulan</h2>
+    <p class="section-desc">Kurikulum disusun bersama mitra industri (Link & Match) untuk memastikan kompetensi lulusan relevan dengan kebutuhan DUDI.</p>
   </div>
   <div class="jurusan-grid">
-
     <div class="jurusan-card fade-up">
-      <div class="jurusan-icon">🔧</div>
-      <p class="jurusan-code">Jurusan 01</p>
+      <div class="jurusan-stripe stripe-orange"></div>
+      <div class="jurusan-icon-wrap icon-orange">🔧</div>
       <h3 class="jurusan-name">Teknik Otomotif</h3>
-      <p class="jurusan-desc">Menguasai teknologi kendaraan bermotor modern, perawatan mesin, sistem kelistrikan otomotif, hingga diagnostik berbasis komputer.</p>
+      <p class="jurusan-desc">Kuasai teknologi kendaraan modern, dari engine management system (EFI), kelistrikan, hingga diagnostik komputer terkini.</p>
       <div class="jurusan-tags">
-        <span class="tag">Servis Kendaraan</span>
-        <span class="tag">EFI System</span>
-        <span class="tag">Transmisi</span>
+        <span class="tag tag-orange">Engine TKR</span>
+        <span class="tag tag-orange">Sistem EFI</span>
+        <span class="tag tag-orange">Chasis</span>
       </div>
       <div class="jurusan-arrow">→</div>
     </div>
 
-    <div class="jurusan-card fade-up">
-      <div class="jurusan-icon">💼</div>
-      <p class="jurusan-code">Jurusan 02</p>
-      <h3 class="jurusan-name">Akuntansi &amp; Keuangan Lembaga</h3>
-      <p class="jurusan-desc">Mempelajari pembukuan, laporan keuangan, perpajakan, dan pengelolaan keuangan lembaga berbasis teknologi digital terkini.</p>
+    <div class="jurusan-card fade-up delay-1">
+      <div class="jurusan-stripe stripe-blue"></div>
+      <div class="jurusan-icon-wrap icon-blue">💼</div>
+      <h3 class="jurusan-name">Akuntansi & Keuangan</h3>
+      <p class="jurusan-desc">Jadilah profesional keuangan. Pelajari pembukuan digital (MYOB), perpajakan, audit, dan penyusunan laporan keuangan lembaga.</p>
       <div class="jurusan-tags">
-        <span class="tag">Akuntansi Digital</span>
-        <span class="tag">Perpajakan</span>
-        <span class="tag">Audit</span>
+        <span class="tag tag-blue">MYOB Accounting</span>
+        <span class="tag tag-blue">Perpajakan</span>
+        <span class="tag tag-blue">Audit</span>
       </div>
       <div class="jurusan-arrow">→</div>
     </div>
 
-    <div class="jurusan-card fade-up">
-      <div class="jurusan-icon">🏢</div>
-      <p class="jurusan-code">Jurusan 03</p>
-      <h3 class="jurusan-name">Manajemen Perkantoran &amp; Layanan Bisnis</h3>
-      <p class="jurusan-desc">Membekali siswa dengan kemampuan administrasi perkantoran modern, layanan pelanggan, korespondensi, dan manajemen dokumen digital.</p>
+    <div class="jurusan-card fade-up delay-2">
+      <div class="jurusan-stripe stripe-green"></div>
+      <div class="jurusan-icon-wrap icon-green">🏢</div>
+      <h3 class="jurusan-name">Manajemen Perkantoran</h3>
+      <p class="jurusan-desc">Kuasai otomatisasi tata kelola perkantoran, public relations, korespondensi digital, dan layanan pelanggan bertaraf prima.</p>
       <div class="jurusan-tags">
-        <span class="tag">Administrasi</span>
-        <span class="tag">Layanan Bisnis</span>
-        <span class="tag">Korespondensi</span>
+        <span class="tag tag-green">Administrasi</span>
+        <span class="tag tag-green">Public Relation</span>
+        <span class="tag tag-green">Kearsipan</span>
       </div>
       <div class="jurusan-arrow">→</div>
     </div>
 
-    <div class="jurusan-card fade-up">
-      <div class="jurusan-icon">💻</div>
-      <p class="jurusan-code">Jurusan 04</p>
-      <h3 class="jurusan-name">Pengembangan Perangkat Lunak &amp; Gim</h3>
-      <p class="jurusan-desc">Belajar coding, desain UI/UX, pengembangan web & mobile, dan pembuatan game dari nol bersama mentor industri teknologi.</p>
+    <div class="jurusan-card fade-up delay-3">
+      <div class="jurusan-stripe stripe-purple"></div>
+      <div class="jurusan-icon-wrap icon-purple">💻</div>
+      <h3 class="jurusan-name">Pengembangan Perangkat Lunak</h3>
+      <p class="jurusan-desc">Ciptakan inovasi digital. Belajar coding (Web & Mobile Apps), desain UI/UX, dan pengembangan Game bersama mentor industri.</p>
       <div class="jurusan-tags">
-        <span class="tag">Web Dev</span>
-        <span class="tag">Mobile App</span>
-        <span class="tag">Game Dev</span>
+        <span class="tag tag-purple">Web Dev</span>
+        <span class="tag tag-purple">Mobile App</span>
+        <span class="tag tag-purple">Game Dev</span>
       </div>
       <div class="jurusan-arrow">→</div>
     </div>
-
   </div>
 </section>
-
-<div class="wave" style="background: white;">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
-    <path d="M0,20 C360,80 1080,0 1440,50 L1440,60 L0,60 Z" fill="#1B2B4B"/>
-  </svg>
-</div>
 
 <!-- KEUNGGULAN -->
 <section class="section keunggulan-section" id="keunggulan">
   <div class="keunggulan-inner">
     <div>
-      <p class="section-label">Mengapa Mutiara 1?</p>
-      <h2 class="section-title">Lebih dari Sekadar<br>Sekolah Biasa</h2>
+      <span class="section-label fade-up">Mengapa Mutiara 1?</span>
+      <h2 class="section-title fade-up delay-1">Lebih dari Sekadar<br>Sekolah Biasa</h2>
+      <p class="section-desc fade-up delay-2">Kami merancang ekosistem pendidikan berstandar industri untuk mencetak generasi yang kompeten, berkarakter, dan siap beradaptasi di era global.</p>
+      
       <div class="keunggulan-list">
-        <div class="keunggulan-item fade-up">
-          <span class="keunggulan-num">01</span>
+        <div class="keunggulan-item fade-up delay-1">
+          <div class="keunggulan-check">✓</div>
           <div class="keunggulan-body">
-            <h4>Kurikulum Industri Terintegrasi</h4>
-            <p>Materi pembelajaran selaras dengan kebutuhan dunia kerja dan disusun bersama mitra industri terpercaya.</p>
+            <h4>Sertifikasi Kompetensi BNSP/LSP</h4>
+            <p>Setiap lulusan dibekali sertifikat keahlian yang diakui secara nasional oleh industri, menjadi nilai tambah yang besar saat melamar kerja.</p>
           </div>
         </div>
-        <div class="keunggulan-item fade-up">
-          <span class="keunggulan-num">02</span>
+        <div class="keunggulan-item fade-up delay-2">
+          <div class="keunggulan-check">✓</div>
           <div class="keunggulan-body">
-            <h4>Sertifikasi Kompetensi Nasional</h4>
-            <p>Siswa mendapatkan sertifikat LSP yang diakui oleh industri nasional sebagai bukti kompetensi profesional.</p>
+            <h4>Lab Berstandar Industri Modern</h4>
+            <p>Fasilitas praktik yang lengkap mulai dari lab jaringan, komputer akuntansi, simulator otomotif, hingga ruang simulasi perkantoran.</p>
           </div>
         </div>
-        <div class="keunggulan-item fade-up">
-          <span class="keunggulan-num">03</span>
+        <div class="keunggulan-item fade-up delay-3">
+          <div class="keunggulan-check">✓</div>
           <div class="keunggulan-body">
-            <h4>Fasilitas Lab Lengkap & Modern</h4>
-            <p>Lab otomotif, lab komputer, lab akuntansi, dan lab perkantoran dilengkapi peralatan berstandar industri.</p>
-          </div>
-        </div>
-        <div class="keunggulan-item fade-up">
-          <span class="keunggulan-num">04</span>
-          <div class="keunggulan-body">
-            <h4>Program Magang di Perusahaan Ternama</h4>
-            <p>Jaringan magang luas di lebih dari 50+ perusahaan mitra di Bandung dan seluruh Indonesia.</p>
+            <h4>Bursa Kerja Khusus (BKK) Aktif</h4>
+            <p>Penyaluran magang dan rekrutmen kerja langsung difasilitasi sekolah bekerjasama dengan puluhan perusahaan terkemuka di Jawa Barat.</p>
           </div>
         </div>
       </div>
     </div>
+    
     <div class="keunggulan-cards">
       <div class="k-card fade-up">
         <div class="k-card-icon">🏆</div>
         <h4>Akreditasi A BAN-SM</h4>
-        <p>Terakreditasi A oleh Badan Akreditasi Nasional Sekolah Menengah sebagai jaminan kualitas pendidikan.</p>
+        <p>Jaminan mutlak kualitas mutu pendidikan oleh Badan Akreditasi Nasional.</p>
       </div>
-      <div class="k-card fade-up">
+      <div class="k-card fade-up delay-1">
         <div class="k-card-icon">🤝</div>
-        <h4>50+ Mitra Dunia Usaha & Industri (DUDI)</h4>
-        <p>Ekosistem industri yang luas membuka peluang magang, rekrutmen, dan pengembangan karier lebih cepat.</p>
+        <h4>50+ Mitra DUDI</h4>
+        <p>Ekosistem industri luas untuk kolaborasi magang dan rekrutmen.</p>
       </div>
-      <div class="k-card fade-up">
+      <div class="k-card fade-up delay-2">
         <div class="k-card-icon">🎓</div>
-        <h4>Ekstra Kurikuler Beragam</h4>
-        <p>Lebih dari 15 pilihan ekstrakurikuler mulai dari olahraga, seni, robotika, hingga kewirausahaan.</p>
+        <h4>15+ Ekstrakurikuler</h4>
+        <p>Wadah pengembangan minat bakat siswa: robotika, seni, bahasa, dll.</p>
       </div>
-      <div class="k-card fade-up">
+      <div class="k-card fade-up delay-3">
         <div class="k-card-icon">📍</div>
-        <h4>Lokasi Strategis di Bandung</h4>
-        <p>Terletak di pusat kota Bandung, mudah dijangkau dari berbagai penjuru dengan akses transportasi publik.</p>
+        <h4>Lokasi Strategis</h4>
+        <p>Mudah dijangkau di Kota Bandung, dengan fasilitas lingkungan yang aman.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="wave" style="background: #1B2B4B;">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
-    <path d="M0,30 C480,80 960,0 1440,40 L1440,60 L0,60 Z" fill="#F8F5EE"/>
-  </svg>
-</div>
+<!-- ALUR SPMB -->
+<section class="section alur-section" id="alur">
+  <div class="alur-header fade-up">
+    <span class="section-label">Panduan Pendaftaran</span>
+    <h2 class="section-title">Alur Penerimaan SPMB Online</h2>
+    <p class="section-desc">Proses pendaftaran dirancang mudah, efisien, dan 100% dapat dilakukan secara daring dari rumah Anda.</p>
+  </div>
+  
+  <div class="alur-steps fade-up delay-1">
+    <div class="alur-line"></div>
+    <div class="alur-step">
+      <div class="alur-num">1</div>
+      <h4>Buat Akun Portal</h4>
+      <p>Registrasi akun di sistem SPMB online dengan email & No. WhatsApp aktif.</p>
+    </div>
+    <div class="alur-step">
+      <div class="alur-num">2</div>
+      <h4>Lengkapi Formulir</h4>
+      <p>Isi biodata diri, data orang tua, dan pilih program keahlian yang diminati.</p>
+    </div>
+    <div class="alur-step">
+      <div class="alur-num">3</div>
+      <h4>Upload Berkas</h4>
+      <p>Unggah softcopy Ijazah/SKL SMP, Kartu Keluarga, dan Pas Foto resmi.</p>
+    </div>
+    <div class="alur-step">
+      <div class="alur-num">4</div>
+      <h4>Tes & Wawancara</h4>
+      <p>Ikuti tes potensi akademik (CBT) dan wawancara peminatan secara online/offline.</p>
+    </div>
+    <div class="alur-step">
+      <div class="alur-num">5</div>
+      <h4>Daftar Ulang</h4>
+      <p>Cek pengumuman kelulusan di portal dan selesaikan administrasi daftar ulang.</p>
+    </div>
+  </div>
+</section>
 
 <!-- TESTIMONI -->
 <section class="section testi-section" id="testimoni">
-  <div class="testi-header">
-    <p class="section-label">Suara Alumni</p>
-    <h2 class="section-title">Mereka Sudah<br>Membuktikannya</h2>
+  <div class="testi-header fade-up">
+    <span class="section-label">Kisah Sukses</span>
+    <h2 class="section-title">Suara Para Alumni Hebat Kami</h2>
   </div>
   <div class="testi-grid">
     <div class="testi-card fade-up">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Berkat jurusan PPLG di SMK Mutiara 1, saya kini bekerja sebagai web developer di startup teknologi Bandung. Ilmu yang diajarkan sangat relevan dengan kebutuhan industri nyata.</p>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Berkat penjurusan PPLG, saya belajar coding dari nol hingga mahir. Kini saya bekerja sebagai Web Developer di startup ternama Bandung. Ilmunya sangat up-to-date!"</p>
       <div class="testi-author">
-        <div class="testi-avatar">R</div>
+        <div class="testi-avatar av-blue">R</div>
         <div>
           <div class="testi-name">Rizky Maulana</div>
-          <div class="testi-role">Web Developer · Alumni PPLG 2023</div>
+          <div class="testi-role">Software Engineer · Alumni PPLG</div>
         </div>
       </div>
     </div>
-    <div class="testi-card fade-up">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Pengalaman magang yang difasilitasi sekolah membuka pintu karier saya di bidang keuangan. Sekarang sudah bekerja di salah satu bank swasta terkemuka di Bandung.</p>
+    <div class="testi-card fade-up delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Program BKK sekolah sangat membantu. Belum lulus pun saya sudah dilirik perusahaan berkat nilai uji kompetensi LSP yang memuaskan. Terima kasih Mutiara 1!"</p>
       <div class="testi-author">
-        <div class="testi-avatar">S</div>
+        <div class="testi-avatar av-green">S</div>
         <div>
           <div class="testi-name">Sari Dewi Pratiwi</div>
-          <div class="testi-role">Staff Keuangan · Alumni AKL 2022</div>
+          <div class="testi-role">Staff Keuangan Bank Swasta · Alumni AKL</div>
         </div>
       </div>
     </div>
-    <div class="testi-card fade-up">
-      <div class="testi-quote">"</div>
-      <p class="testi-text">Lab otomotif yang lengkap membuat saya percaya diri saat terjun langsung ke dunia kerja. Sertifikasi LSP yang saya dapat sangat membantu di bengkel resmi tempat saya bekerja.</p>
+    <div class="testi-card fade-up delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Lab otomotif yang sangat lengkap membuat saya percaya diri masuk dunia industri riil. Magang di dealer resmi benar-benar membuka wawasan dan karir saya."</p>
       <div class="testi-author">
-        <div class="testi-avatar">A</div>
+        <div class="testi-avatar av-orange">A</div>
         <div>
           <div class="testi-name">Agus Purnomo</div>
-          <div class="testi-role">Teknisi Otomotif · Alumni TO 2023</div>
+          <div class="testi-role">Kepala Mekanik Bengkel Resmi · Alumni TO</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SPMB CTA -->
+<!-- CTA SPMB -->
 <section class="spmb-section" id="spmb">
-  <div class="spmb-inner">
-    <p class="section-label" style="text-align:center">SPMB 2025/2026</p>
-    <h2 class="spmb-title">Jadilah Bagian dari<br><span>Keluarga Mutiara</span></h2>
-    <p class="spmb-desc">Pendaftaran murid baru sudah dibuka. Kuota terbatas — segera daftarkan diri Anda sebelum kehabisan tempat!</p>
+  <div class="spmb-inner fade-up">
+    <div class="hero-badge" style="margin-bottom: 20px;"><span></span> Kuota Terbatas!</div>
+    <h2 class="spmb-title">Jadilah Bagian dari<br><span>Keluarga Besar Mutiara 1</span></h2>
+    <p class="spmb-desc">Pendaftaran Gelombang Pertama SPMB Tahun Ajaran 2025/2026 resmi dibuka. Dapatkan potongan biaya awal khusus untuk pendaftar bulan ini!</p>
+    
     <div class="spmb-actions">
-      <a href="#" class="btn-primary">Daftar Online Sekarang</a>
-      <a href="#" style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.3);color:white;font-size:0.9rem;font-weight:500;padding:15px 32px;border-radius:8px;text-decoration:none;transition:all 0.25s;">Hubungi via WhatsApp</a>
+      <a href="#" class="btn-primary">Daftar Via Web Sekarang</a>
+      <a href="https://wa.me/6281234567890" class="btn-wa">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Tanya via WhatsApp
+      </a>
     </div>
-    <p class="spmb-note">📍 Jl. Mutiara No. 1, Bandung &nbsp;|&nbsp; 📞 (022) XXXX-XXXX &nbsp;|&nbsp; 🕐 Senin–Sabtu 07.00–15.00</p>
+
+    <div class="spmb-info">
+      <div class="spmb-info-item">📍 Gg. Bakti II No.18, Garuda, Kec. Andir, Kota Bandung, Jawa Barat 40184</div>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
+        <div class="spmb-info-item">📞 (022) 601XXXX</div>
+        <div class="spmb-info-item">🕐 Jam Layanan: Senin–Sabtu (07.00–15.00)</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -563,90 +639,86 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand">
-        <img src="images.jpg" alt="Logo" class="footer-logo">
+        <img src="logo.jpg" alt="Logo" class="footer-logo">
         <div>
-          <div class="footer-school">SMK Mutiara 1 Bandung<span>Sekolah Menengah Kejuruan</span></div>
+          <div class="footer-school-name">SMK Mutiara 1<span>Sekolah Menengah Kejuruan</span></div>
         </div>
       </div>
-      <p class="footer-tagline">Mencetak generasi muda yang kompeten, berkarakter, dan siap bersaing di era industri global.</p>
+      <p class="footer-address">
+        <strong>Kampus SMK Mutiara 1 Bandung</strong><br>
+        Gg. Bakti II No.18, Garuda, Kec. Andir<br>
+        Kota Bandung, Jawa Barat 40184
+      </p>
+      <p class="footer-address" style="color: rgba(255,255,255,0.4); font-size: 0.8rem;">
+        Mencetak generasi muda yang kompeten, berkarakter, dan siap bersaing di era industri global.
+      </p>
     </div>
     <div class="footer-col">
-      <h5>Program</h5>
+      <h5>Program Keahlian</h5>
       <ul>
-        <li><a href="#">Teknik Otomotif</a></li>
-        <li><a href="#">Akuntansi & Keuangan</a></li>
-        <li><a href="#">Manajemen Perkantoran</a></li>
-        <li><a href="#">Pengembangan Perangkat Lunak & Gim</a></li>
+        <li><a href="#">Teknik Kendaraan Ringan Otomotif</a></li>
+        <li><a href="#">Akuntansi & Keuangan Lembaga</a></li>
+        <li><a href="#">Manajemen Perkantoran (MPLB)</a></li>
+        <li><a href="#">Rekayasa Perangkat Lunak (PPLG)</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Informasi</h5>
+      <h5>Informasi Cepat</h5>
       <ul>
-        <li><a href="#">Pendaftaran SPMB</a></li>
-        <li><a href="#">Profil Sekolah</a></li>
-        <li><a href="#">Ekskul & Organisasi</a></li>
-        <li><a href="#">Berita Sekolah</a></li>
-        <li><a href="#">Kontak Kami</a></li>
+        <li><a href="#">Portal Pendaftaran SPMB</a></li>
+        <li><a href="#">Brosur Digital (PDF)</a></li>
+        <li><a href="#">Profil Pengajar & Fasilitas</a></li>
+        <li><a href="#">Informasi Beasiswa Pendidikan</a></li>
+        <li><a href="#">Pusat Bantuan & Kontak</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 SMK Mutiara 1 Bandung. Hak cipta dilindungi.</p>
+    <p class="footer-copy">© 2025 SMK Mutiara 1 Bandung. Seluruh Hak Cipta Dilindungi.</p>
     <div class="footer-socials">
-      <a href="#" class="social-btn">ig</a>
-      <a href="#" class="social-btn">yt</a>
-      <a href="#" class="social-btn">fb</a>
-      <a href="#" class="social-btn">wa</a>
+      <a href="#" class="social-btn">IG</a>
+      <a href="#" class="social-btn">YT</a>
+      <a href="#" class="social-btn">FB</a>
+      <a href="#" class="social-btn">WA</a>
     </div>
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/6285883803277" class="wa-float" title="Hubungi via WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
+<!-- WA FLOAT -->
+<a href="https://wa.me/6281234567890" class="wa-float" title="Chat Admin Pendaftaran">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-  // Counter animation
-  function animateCounter(el, target, duration) {
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start = Math.min(start + step, target);
-      el.textContent = Math.floor(start);
-      if (start >= target) clearInterval(timer);
-    }, 16);
-  }
-
-  const counters = [
-    { el: document.getElementById('cnt1'), target: 19 },
-    { el: document.getElementById('cnt2'), target: 4 },
-    { el: document.getElementById('cnt3'), target: 500 },
-    { el: document.getElementById('cnt4'), target: 10 }
-  ];
-
-  let counted = false;
-  const heroObs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !counted) {
-      counted = true;
-      counters.forEach(c => animateCounter(c.el, c.target, 1800));
-    }
-  }, { threshold: 0.5 });
-  heroObs.observe(document.querySelector('.hero-stats'));
-
-  // Fade-up on scroll
+  // Advanced Scroll Animation (Fade Up)
   const fadeEls = document.querySelectorAll('.fade-up');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  fadeEls.forEach(el => observer.observe(el));
+  const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { 
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Opsional: unobserve jika ingin animasi hanya sekali jalan
+        // obs.unobserve(e.target);
+      }
+    });
+  }, observerOptions);
+  
+  fadeEls.forEach(el => obs.observe(el));
 
-  // Navbar scroll effect
+  // Navbar Dynamic Glass Effect on Scroll
+  const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.2)' : 'none';
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(255, 255, 255, 0.9)';
+      nav.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.08)';
+      nav.style.padding = '0 5%';
+      nav.style.height = '68px';
+    } else {
+      nav.style.background = 'rgba(255, 255, 255, 0.75)';
+      nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.05)';
+      nav.style.height = '76px';
+    }
   });
 </script>
 </body>
