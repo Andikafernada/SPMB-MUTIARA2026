@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMK Mutiara 1 Bandung – Cetak Generasi Unggul</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1B2B4B;
+    --navy-mid: #243560;
+    --navy-light: #2E4080;
+    --gold: #C9913A;
+    --gold-light: #E5B55A;
+    --gold-pale: #F5E6C8;
+    --cream: #F8F5EE;
+    --white: #FFFFFF;
+    --text-dark: #0D1B2A;
+    --text-mid: #3A4A5C;
+    --text-soft: #6B7A8D;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(27, 43, 75, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,145,58,0.2);
+    transition: all 0.3s;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo { width: 40px; height: 40px; object-fit: contain; }
+  .nav-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.2; }
+  .nav-name span { display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.65rem; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 10px 24px; border-radius: 6px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,145,58,0.4); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3560 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px),
+                      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px);
+  }
+  .hero-glow {
+    position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,145,58,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; text-align: center; max-width: 800px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,145,58,0.15); border: 1px solid rgba(201,145,58,0.4);
+    color: var(--gold-light); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 7px 18px; border-radius: 100px; margin-bottom: 28px;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero-logo { width: 120px; height: 120px; object-fit: contain; margin: 0 auto 24px; filter: drop-shadow(0 8px 32px rgba(201,145,58,0.3)); animation: floatLogo 4s ease-in-out infinite; }
+  @keyframes floatLogo { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .hero-school { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 12px; }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--white); margin-bottom: 20px;
+  }
+  .hero-title em { font-style: normal; color: var(--gold-light); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; }
+
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); font-weight: 700; font-size: 0.9rem;
+    padding: 16px 36px; border-radius: 8px; text-decoration: none;
+    transition: all 0.25s; box-shadow: 0 4px 24px rgba(201,145,58,0.35);
+    letter-spacing: 0.03em;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,145,58,0.5); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.35); color: var(--white);
+    font-size: 0.9rem; font-weight: 500;
+    padding: 15px 32px; border-radius: 8px; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); background: rgba(201,145,58,0.08); }
+
+  /* ── STATS ── */
+  .hero-stats { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; }
+  .stat-num span { color: var(--gold-light); }
+  .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+  /* ── WAVE DIVIDER ── */
+  .wave { line-height: 0; }
+  .wave svg { display: block; }
+
+  /* ── JURUSAN SECTION ── */
+  .section { padding: 100px 5%; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--navy); line-height: 1.15; margin-bottom: 16px; }
+  .section-desc { font-size: 1rem; color: var(--text-soft); max-width: 520px; line-height: 1.75; }
+
+  .jurusan-section { background: var(--white); }
+  .jurusan-header { text-align: center; margin-bottom: 64px; }
+  .jurusan-header .section-desc { margin: 0 auto; }
+
+  .jurusan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+
+  .jurusan-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 36px 28px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(27,43,75,0.08);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s;
+    transform-style: preserve-3d;
+  }
+  .jurusan-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 60px rgba(27,43,75,0.15); }
+  .jurusan-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .jurusan-card:hover::before { transform: scaleX(1); }
+
+  .jurusan-icon {
+    width: 64px; height: 64px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  }
+  .jurusan-code { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+  .jurusan-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
+  .jurusan-desc { font-size: 0.85rem; color: var(--text-soft); line-height: 1.65; margin-bottom: 24px; }
+  .jurusan-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 0.68rem; font-weight: 600; padding: 4px 10px; border-radius: 100px; background: rgba(27,43,75,0.07); color: var(--navy); letter-spacing: 0.04em; }
+  .jurusan-arrow { position: absolute; bottom: 28px; right: 28px; color: var(--gold); opacity: 0; transform: translateX(-6px); transition: all 0.25s; font-size: 1.2rem; }
+  .jurusan-card:hover .jurusan-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ── KEUNGGULAN ── */
+  .keunggulan-section { background: var(--navy); }
+  .keunggulan-section .section-title { color: var(--white); }
+  .keunggulan-section .section-label { color: var(--gold-light); }
+  .keunggulan-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  @media(max-width:768px){.keunggulan-inner{grid-template-columns:1fr;gap:40px}}
+
+  .keunggulan-list { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
+  .keunggulan-item { display: flex; gap: 18px; align-items: flex-start; }
+  .keunggulan-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: rgba(201,145,58,0.25); line-height: 1; min-width: 40px; }
+  .keunggulan-body h4 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .keunggulan-body p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  .keunggulan-cards { display: flex; flex-direction: column; gap: 16px; }
+  .k-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 24px;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .k-card:hover { background: rgba(201,145,58,0.1); border-color: rgba(201,145,58,0.3); }
+  .k-card-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .k-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .k-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ── TESTIMONIAL ── */
+  .testi-section { background: var(--cream); }
+  .testi-header { text-align: center; margin-bottom: 60px; }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .testi-card {
+    background: var(--white); border-radius: 16px; padding: 32px;
+    border: 1px solid rgba(27,43,75,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .testi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(27,43,75,0.1); }
+  .testi-quote { font-size: 2rem; color: var(--gold); line-height: 1; margin-bottom: 16px; }
+  .testi-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--gold)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+  .testi-role { font-size: 0.75rem; color: var(--text-soft); }
+
+  /* ── CTA SPMB ── */
+  .spmb-section {
+    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
+    padding: 100px 5%; text-align: center; position: relative; overflow: hidden;
+  }
+  .spmb-section::before {
+    content: ''; position: absolute; top: -50%; left: -20%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,145,58,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .spmb-section::after {
+    content: ''; position: absolute; bottom: -50%; right: -20%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,145,58,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .spmb-inner { position: relative; max-width: 680px; margin: 0 auto; }
+  .spmb-section .section-label { color: var(--gold-light); text-align: center; }
+  .spmb-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
+  .spmb-title span { color: var(--gold-light); }
+  .spmb-desc { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.7; margin-bottom: 40px; }
+  .spmb-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .spmb-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0D1B2A; padding: 60px 5% 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  @media(max-width:768px){.footer-inner{grid-template-columns:1fr;gap:32px}}
+  .footer-brand { display: flex; align-items: flex-start; gap: 14px; }
+  .footer-logo { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
+  .footer-school { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--white); }
+  .footer-school span { display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.72rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+  .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.65; margin-top: 12px; }
+  .footer-col h5 { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { font-size: 0.84rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+  .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 99;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    text-decoration: none; transition: transform 0.25s;
+    animation: waBounce 3s ease-in-out infinite;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  @keyframes waBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    .nav-links { display: none; }
+    .hero-stats { gap: 28px; }
+    .stat-num { font-size: 1.8rem; }
+    .jurusan-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(.22,.68,0,1); }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up:nth-child(2){transition-delay:0.1s}
+  .fade-up:nth-child(3){transition-delay:0.2s}
+  .fade-up:nth-child(4){transition-delay:0.3s}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="/mnt/user-data/uploads/images.jpg" alt="Logo SMK Mutiara 1" class="nav-logo">
+    <div class="nav-name">
+      SMK Mutiara 1
+      <span>Bandung</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#jurusan">Jurusan</a>
+    <a href="#keunggulan">Keunggulan</a>
+    <a href="#testimoni">Alumni</a>
+    <a href="#spmb">SPMB</a>
+  </div>
+  <a href="#spmb" class="nav-cta">Daftar Sekarang</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Seleksi Penerimaan Murid Baru 2025/2026</div>
+    <img src="/mnt/user-data/uploads/images.jpg" alt="Logo SMK Mutiara 1 Bandung" class="hero-logo">
+    <p class="hero-school">SMK Mutiara 1 Bandung</p>
+    <h1 class="hero-title">
+      Cetak <em>Generasi</em><br>Unggul &amp; Siap Kerja
+    </h1>
+    <p class="hero-sub">
+      Sekolah menengah kejuruan unggulan di Bandung dengan 4 program keahlian pilihan, fasilitas modern, dan sertifikasi kompetensi nasional.
+    </p>
+    <div class="hero-actions">
+      <a href="#spmb" class="btn-primary">Daftar SPMB Sekarang</a>
+      <a href="#jurusan" class="btn-outline">Lihat Program Jurusan</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num"><span id="cnt1">0</span>+</div>
+        <div class="stat-label">Tahun Pengalaman</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span id="cnt2">0</span></div>
+        <div class="stat-label">Program Keahlian</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span id="cnt3">0</span>+</div>
+        <div class="stat-label">Alumni Berprestasi</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span id="cnt4">0</span>+</div>
+        <div class="stat-label">Sertifikasi Kompetensi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
+    <path d="M0,60 C360,0 1080,80 1440,20 L1440,60 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<!-- JURUSAN -->
+<section class="section jurusan-section" id="jurusan">
+  <div class="jurusan-header">
+    <p class="section-label">Program Keahlian</p>
+    <h2 class="section-title">4 Jurusan<br>Pilihan Terbaik</h2>
+    <p class="section-desc">Setiap jurusan dirancang dengan kurikulum berbasis industri dan didukung oleh pengajar berpengalaman.</p>
+  </div>
+  <div class="jurusan-grid">
+
+    <div class="jurusan-card fade-up">
+      <div class="jurusan-icon">🔧</div>
+      <p class="jurusan-code">Jurusan 01</p>
+      <h3 class="jurusan-name">Teknik Otomotif</h3>
+      <p class="jurusan-desc">Menguasai teknologi kendaraan bermotor modern, perawatan mesin, sistem kelistrikan otomotif, hingga diagnostik berbasis komputer.</p>
+      <div class="jurusan-tags">
+        <span class="tag">Servis Kendaraan</span>
+        <span class="tag">EFI System</span>
+        <span class="tag">Transmisi</span>
+      </div>
+      <div class="jurusan-arrow">→</div>
+    </div>
+
+    <div class="jurusan-card fade-up">
+      <div class="jurusan-icon">💼</div>
+      <p class="jurusan-code">Jurusan 02</p>
+      <h3 class="jurusan-name">Akuntansi &amp; Keuangan Lembaga</h3>
+      <p class="jurusan-desc">Mempelajari pembukuan, laporan keuangan, perpajakan, dan pengelolaan keuangan lembaga berbasis teknologi digital terkini.</p>
+      <div class="jurusan-tags">
+        <span class="tag">Akuntansi Digital</span>
+        <span class="tag">Perpajakan</span>
+        <span class="tag">Audit</span>
+      </div>
+      <div class="jurusan-arrow">→</div>
+    </div>
+
+    <div class="jurusan-card fade-up">
+      <div class="jurusan-icon">🏢</div>
+      <p class="jurusan-code">Jurusan 03</p>
+      <h3 class="jurusan-name">Manajemen Perkantoran &amp; Layanan Bisnis</h3>
+      <p class="jurusan-desc">Membekali siswa dengan kemampuan administrasi perkantoran modern, layanan pelanggan, korespondensi, dan manajemen dokumen digital.</p>
+      <div class="jurusan-tags">
+        <span class="tag">Administrasi</span>
+        <span class="tag">Layanan Bisnis</span>
+        <span class="tag">Korespondensi</span>
+      </div>
+      <div class="jurusan-arrow">→</div>
+    </div>
+
+    <div class="jurusan-card fade-up">
+      <div class="jurusan-icon">💻</div>
+      <p class="jurusan-code">Jurusan 04</p>
+      <h3 class="jurusan-name">Pengembangan Perangkat Lunak &amp; Gim</h3>
+      <p class="jurusan-desc">Belajar coding, desain UI/UX, pengembangan web & mobile, dan pembuatan game dari nol bersama mentor industri teknologi.</p>
+      <div class="jurusan-tags">
+        <span class="tag">Web Dev</span>
+        <span class="tag">Mobile App</span>
+        <span class="tag">Game Dev</span>
+      </div>
+      <div class="jurusan-arrow">→</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wave" style="background: white;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
+    <path d="M0,20 C360,80 1080,0 1440,50 L1440,60 L0,60 Z" fill="#1B2B4B"/>
+  </svg>
+</div>
+
+<!-- KEUNGGULAN -->
+<section class="section keunggulan-section" id="keunggulan">
+  <div class="keunggulan-inner">
+    <div>
+      <p class="section-label">Mengapa Mutiara 1?</p>
+      <h2 class="section-title">Lebih dari Sekadar<br>Sekolah Biasa</h2>
+      <div class="keunggulan-list">
+        <div class="keunggulan-item fade-up">
+          <span class="keunggulan-num">01</span>
+          <div class="keunggulan-body">
+            <h4>Kurikulum Industri Terintegrasi</h4>
+            <p>Materi pembelajaran selaras dengan kebutuhan dunia kerja dan disusun bersama mitra industri terpercaya.</p>
+          </div>
+        </div>
+        <div class="keunggulan-item fade-up">
+          <span class="keunggulan-num">02</span>
+          <div class="keunggulan-body">
+            <h4>Sertifikasi Kompetensi Nasional</h4>
+            <p>Siswa mendapatkan sertifikat LSP yang diakui oleh industri nasional sebagai bukti kompetensi profesional.</p>
+          </div>
+        </div>
+        <div class="keunggulan-item fade-up">
+          <span class="keunggulan-num">03</span>
+          <div class="keunggulan-body">
+            <h4>Fasilitas Lab Lengkap & Modern</h4>
+            <p>Lab otomotif, lab komputer, lab akuntansi, dan lab perkantoran dilengkapi peralatan berstandar industri.</p>
+          </div>
+        </div>
+        <div class="keunggulan-item fade-up">
+          <span class="keunggulan-num">04</span>
+          <div class="keunggulan-body">
+            <h4>Program Magang di Perusahaan Ternama</h4>
+            <p>Jaringan magang luas di lebih dari 50+ perusahaan mitra di Bandung dan seluruh Indonesia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="keunggulan-cards">
+      <div class="k-card fade-up">
+        <div class="k-card-icon">🏆</div>
+        <h4>Akreditasi A BAN-SM</h4>
+        <p>Terakreditasi A oleh Badan Akreditasi Nasional Sekolah Menengah sebagai jaminan kualitas pendidikan.</p>
+      </div>
+      <div class="k-card fade-up">
+        <div class="k-card-icon">🤝</div>
+        <h4>50+ Mitra Dunia Usaha & Industri (DUDI)</h4>
+        <p>Ekosistem industri yang luas membuka peluang magang, rekrutmen, dan pengembangan karier lebih cepat.</p>
+      </div>
+      <div class="k-card fade-up">
+        <div class="k-card-icon">🎓</div>
+        <h4>Ekstra Kurikuler Beragam</h4>
+        <p>Lebih dari 15 pilihan ekstrakurikuler mulai dari olahraga, seni, robotika, hingga kewirausahaan.</p>
+      </div>
+      <div class="k-card fade-up">
+        <div class="k-card-icon">📍</div>
+        <h4>Lokasi Strategis di Bandung</h4>
+        <p>Terletak di pusat kota Bandung, mudah dijangkau dari berbagai penjuru dengan akses transportasi publik.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave" style="background: #1B2B4B;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:60px;">
+    <path d="M0,30 C480,80 960,0 1440,40 L1440,60 L0,60 Z" fill="#F8F5EE"/>
+  </svg>
+</div>
+
+<!-- TESTIMONI -->
+<section class="section testi-section" id="testimoni">
+  <div class="testi-header">
+    <p class="section-label">Suara Alumni</p>
+    <h2 class="section-title">Mereka Sudah<br>Membuktikannya</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Berkat jurusan PPLG di SMK Mutiara 1, saya kini bekerja sebagai web developer di startup teknologi Bandung. Ilmu yang diajarkan sangat relevan dengan kebutuhan industri nyata.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rizky Maulana</div>
+          <div class="testi-role">Web Developer · Alumni PPLG 2023</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Pengalaman magang yang difasilitasi sekolah membuka pintu karier saya di bidang keuangan. Sekarang sudah bekerja di salah satu bank swasta terkemuka di Bandung.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">S</div>
+        <div>
+          <div class="testi-name">Sari Dewi Pratiwi</div>
+          <div class="testi-role">Staff Keuangan · Alumni AKL 2022</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-up">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Lab otomotif yang lengkap membuat saya percaya diri saat terjun langsung ke dunia kerja. Sertifikasi LSP yang saya dapat sangat membantu di bengkel resmi tempat saya bekerja.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Agus Purnomo</div>
+          <div class="testi-role">Teknisi Otomotif · Alumni TO 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPMB CTA -->
+<section class="spmb-section" id="spmb">
+  <div class="spmb-inner">
+    <p class="section-label" style="text-align:center">SPMB 2025/2026</p>
+    <h2 class="spmb-title">Jadilah Bagian dari<br><span>Keluarga Mutiara</span></h2>
+    <p class="spmb-desc">Pendaftaran murid baru sudah dibuka. Kuota terbatas — segera daftarkan diri Anda sebelum kehabisan tempat!</p>
+    <div class="spmb-actions">
+      <a href="#" class="btn-primary">Daftar Online Sekarang</a>
+      <a href="#" style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.3);color:white;font-size:0.9rem;font-weight:500;padding:15px 32px;border-radius:8px;text-decoration:none;transition:all 0.25s;">Hubungi via WhatsApp</a>
+    </div>
+    <p class="spmb-note">📍 Jl. Mutiara No. 1, Bandung &nbsp;|&nbsp; 📞 (022) XXXX-XXXX &nbsp;|&nbsp; 🕐 Senin–Sabtu 07.00–15.00</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <img src="/mnt/user-data/uploads/images.jpg" alt="Logo" class="footer-logo">
+        <div>
+          <div class="footer-school">SMK Mutiara 1 Bandung<span>Sekolah Menengah Kejuruan</span></div>
+        </div>
+      </div>
+      <p class="footer-tagline">Mencetak generasi muda yang kompeten, berkarakter, dan siap bersaing di era industri global.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Program</h5>
+      <ul>
+        <li><a href="#">Teknik Otomotif</a></li>
+        <li><a href="#">Akuntansi & Keuangan</a></li>
+        <li><a href="#">Manajemen Perkantoran</a></li>
+        <li><a href="#">Pengembangan Perangkat Lunak & Gim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informasi</h5>
+      <ul>
+        <li><a href="#">Pendaftaran SPMB</a></li>
+        <li><a href="#">Profil Sekolah</a></li>
+        <li><a href="#">Ekskul & Organisasi</a></li>
+        <li><a href="#">Berita Sekolah</a></li>
+        <li><a href="#">Kontak Kami</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 SMK Mutiara 1 Bandung. Hak cipta dilindungi.</p>
+    <div class="footer-socials">
+      <a href="#" class="social-btn">ig</a>
+      <a href="#" class="social-btn">yt</a>
+      <a href="#" class="social-btn">fb</a>
+      <a href="#" class="social-btn">wa</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/6285883803277" class="wa-float" title="Hubungi via WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Counter animation
+  function animateCounter(el, target, duration) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start);
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+
+  const counters = [
+    { el: document.getElementById('cnt1'), target: 19 },
+    { el: document.getElementById('cnt2'), target: 4 },
+    { el: document.getElementById('cnt3'), target: 500 },
+    { el: document.getElementById('cnt4'), target: 10 }
+  ];
+
+  let counted = false;
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      counters.forEach(c => animateCounter(c.el, c.target, 1800));
+    }
+  }, { threshold: 0.5 });
+  heroObs.observe(document.querySelector('.hero-stats'));
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(0,0,0,0.2)' : 'none';
+  });
+</script>
+</body>
+</html>
