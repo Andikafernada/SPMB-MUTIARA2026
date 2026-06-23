@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPMB SMK Mutiara – Seleksi Penerimaan Murid Baru</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #0D1F3C;
+    --navy-light: #132847;
+    --blue: #1E6FFF;
+    --blue-bright: #4D91FF;
+    --gold: #FFD700;
+    --gold-dim: #C9A900;
+    --white: #FFFFFF;
+    --gray: #8B9AB4;
+    --gray-light: #C5CDD8;
+    --success: #00C896;
+    --danger: #FF4757;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(30,111,255,0.15);
+    transition: padding .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--blue), var(--gold));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900; font-size: 18px; color: var(--navy);
+  }
+  .nav-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; color: var(--white);
+  }
+  .nav-sub { font-size: 10px; color: var(--gray); letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--gray-light); text-decoration: none;
+    font-size: 13px; font-weight: 500; letter-spacing: .5px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .btn-admin-nav {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 6px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-admin-nav:hover {
+    background: var(--gold); color: var(--navy);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 100px 48px 60px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(30,111,255,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 20%, rgba(255,215,0,0.06) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(30,111,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,111,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+  /* Particles */
+  .particles { position: absolute; inset: 0; pointer-events: none; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--blue);
+    animation: float linear infinite;
+    opacity: 0;
+  }
+  @keyframes float {
+    0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+    10%  { opacity: .6; }
+    90%  { opacity: .3; }
+    100% { transform: translateY(-20px) scale(1); opacity: 0; }
+  }
+  .hero-content {
+    position: relative; text-align: center; max-width: 820px; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 18px;
+    background: rgba(30,111,255,0.15);
+    border: 1px solid rgba(30,111,255,0.35);
+    border-radius: 999px;
+    font-size: 11px; letter-spacing: 2px; color: var(--blue-bright);
+    font-weight: 600; margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue-bright);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(.7); }
+  }
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(32px, 6vw, 68px);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .hero-title span {
+    background: linear-gradient(135deg, var(--gold) 0%, #FFA500 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-school {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(14px, 2.5vw, 20px);
+    font-weight: 600; letter-spacing: 4px;
+    color: var(--blue-bright);
+    margin-bottom: 24px; text-transform: uppercase;
+  }
+  .hero-desc {
+    font-size: 16px; color: var(--gray-light);
+    line-height: 1.7; max-width: 560px; margin: 0 auto 44px;
+    font-weight: 400;
+  }
+  .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 15px 36px;
+    background: linear-gradient(135deg, var(--blue) 0%, #0050CC 100%);
+    color: var(--white);
+    border: none; border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: .5px;
+    cursor: pointer; transition: all .25s;
+    box-shadow: 0 0 30px rgba(30,111,255,0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(30,111,255,0.55);
+  }
+  .btn-outline {
+    padding: 15px 36px;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all .25s;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold); color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* Countdown */
+  .countdown-wrap {
+    margin-top: 56px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .countdown-label {
+    font-size: 11px; letter-spacing: 2.5px; color: var(--gray);
+    text-transform: uppercase; font-weight: 600;
+  }
+  .countdown {
+    display: flex; gap: 20px;
+  }
+  .cd-unit {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .cd-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; color: var(--gold);
+    background: rgba(255,215,0,0.06);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 10px;
+    width: 80px; text-align: center; padding: 10px 0;
+    line-height: 1;
+  }
+  .cd-label { font-size: 10px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+  .cd-sep {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 36px; color: var(--gold);
+    opacity: .5; align-self: center; margin-bottom: 20px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:.5} 50%{opacity:0} }
+
+  /* ── STATS ── */
+  #stats {
+    padding: 80px 48px;
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(30,111,255,0.1);
+    border-bottom: 1px solid rgba(30,111,255,0.1);
+  }
+  .stats-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 40px;
+    text-align: center;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px; font-weight: 900; color: var(--blue-bright);
+    line-height: 1;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-desc { font-size: 13px; color: var(--gray); margin-top: 6px; letter-spacing: .5px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-size: 11px; letter-spacing: 3px; color: var(--blue-bright);
+    text-transform: uppercase; font-weight: 700; margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 700; line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-desc { font-size: 15px; color: var(--gray-light); line-height: 1.7; max-width: 560px; }
+
+  /* ── JURUSAN (PROGRAMS) ── */
+  #jurusan { background: var(--navy); }
+  .jurusan-header { text-align: center; margin-bottom: 60px; }
+  .jurusan-header .section-desc { margin: 0 auto; }
+  .programs-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+  }
+  .program-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(30,111,255,0.12);
+    border-radius: 16px; padding: 36px 28px;
+    transition: all .3s; position: relative; overflow: hidden;
+    cursor: default;
+  }
+  .program-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    opacity: 0; transition: opacity .3s;
+  }
+  .program-card:hover {
+    border-color: rgba(30,111,255,0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(30,111,255,0.1);
+  }
+  .program-card:hover::before { opacity: 1; }
+  .program-icon {
+    width: 52px; height: 52px;
+    background: rgba(30,111,255,0.12);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .program-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 10px; color: var(--white);
+  }
+  .program-desc { font-size: 13px; color: var(--gray); line-height: 1.65; }
+  .program-quota {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .program-quota-label { font-size: 11px; color: var(--gray); }
+  .program-quota-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--gold);
+  }
+
+  /* ── JALUR (ADMISSION) ── */
+  #jalur { background: var(--navy-mid); }
+  .jalur-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .jalur-list { display: flex; flex-direction: column; gap: 18px; margin-top: 40px; }
+  .jalur-item {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 22px 24px;
+    background: rgba(30,111,255,0.05);
+    border: 1px solid rgba(30,111,255,0.1);
+    border-radius: 12px;
+    transition: border-color .2s;
+  }
+  .jalur-item:hover { border-color: rgba(30,111,255,0.3); }
+  .jalur-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px; font-weight: 900;
+    color: var(--blue);
+    min-width: 36px;
+  }
+  .jalur-info {}
+  .jalur-name { font-weight: 700; margin-bottom: 4px; font-size: 15px; }
+  .jalur-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+  .jalur-visual {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .timeline-step {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .timeline-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--blue); flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(30,111,255,0.6);
+    position: relative;
+  }
+  .timeline-dot::after {
+    content: ''; position: absolute;
+    top: 12px; left: 5px;
+    width: 2px; height: 36px;
+    background: linear-gradient(var(--blue), transparent);
+  }
+  .timeline-step:last-child .timeline-dot::after { display: none; }
+  .timeline-content {}
+  .timeline-title { font-size: 14px; font-weight: 600; }
+  .timeline-date { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+  /* ── PERSYARATAN ── */
+  #syarat { background: var(--navy); }
+  .syarat-inner {
+    max-width: 900px; margin: 0 auto; text-align: center;
+  }
+  .syarat-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; text-align: left;
+  }
+  .syarat-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  .syarat-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .syarat-text { font-size: 13px; color: var(--gray-light); line-height: 1.55; }
+
+  /* ── CTA ── */
+  #cta {
+    background: var(--navy-mid);
+    padding: 100px 48px;
+    text-align: center;
+    border-top: 1px solid rgba(255,215,0,0.08);
+  }
+  .cta-inner { max-width: 620px; margin: 0 auto; }
+  .cta-inner .section-title { margin-bottom: 16px; }
+  .cta-inner .section-desc { margin: 0 auto 40px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060F1E;
+    padding: 48px;
+    border-top: 1px solid rgba(30,111,255,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-left { }
+  .footer-school {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px; font-weight: 700; margin-bottom: 6px;
+  }
+  .footer-address { font-size: 12px; color: var(--gray); line-height: 1.6; }
+  .footer-right { font-size: 12px; color: var(--gray); }
+
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(6,15,30,0.92); backdrop-filter: blur(10px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+
+  /* ── LOGIN MODAL ── */
+  .login-box {
+    background: var(--navy-mid);
+    border: 1px solid rgba(30,111,255,0.25);
+    border-radius: 20px;
+    padding: 48px 44px;
+    width: 100%; max-width: 420px;
+    position: relative;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 60px rgba(30,111,255,0.1);
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  .login-close {
+    position: absolute; top: 18px; right: 22px;
+    background: none; border: none; color: var(--gray);
+    font-size: 22px; cursor: pointer; line-height: 1;
+    transition: color .2s;
+  }
+  .login-close:hover { color: var(--white); }
+  .login-icon {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--blue), var(--gold));
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin: 0 auto 24px;
+  }
+  .login-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px; font-weight: 700;
+    text-align: center; margin-bottom: 6px;
+  }
+  .login-sub { text-align: center; color: var(--gray); font-size: 13px; margin-bottom: 36px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .5px; color: var(--gray-light); margin-bottom: 8px; }
+  .field input {
+    width: 100%; padding: 13px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 14px;
+    transition: border-color .2s;
+    outline: none;
+  }
+  .field input:focus { border-color: var(--blue); }
+  .field input::placeholder { color: rgba(255,255,255,0.2); }
+  .btn-login {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--blue), #0050CC);
+    border: none; border-radius: 8px;
+    color: var(--white); font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: .5px;
+    cursor: pointer; margin-top: 8px;
+    transition: all .2s;
+  }
+  .btn-login:hover { filter: brightness(1.15); transform: translateY(-1px); }
+  .login-error { color: var(--danger); font-size: 12px; text-align: center; margin-top: 10px; display: none; }
+
+  /* ── ADMIN PANEL ── */
+  .admin-panel {
+    background: var(--navy-mid);
+    border: 1px solid rgba(30,111,255,0.15);
+    border-radius: 24px;
+    width: 96vw; max-width: 1200px;
+    max-height: 90vh; overflow-y: auto;
+    position: relative;
+    animation: slideUp .3s ease;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  }
+  .admin-panel::-webkit-scrollbar { width: 6px; }
+  .admin-panel::-webkit-scrollbar-track { background: transparent; }
+  .admin-panel::-webkit-scrollbar-thumb { background: rgba(30,111,255,0.3); border-radius: 3px; }
+  .admin-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 36px;
+    border-bottom: 1px solid rgba(30,111,255,0.1);
+    position: sticky; top: 0;
+    background: var(--navy-mid);
+    z-index: 10;
+  }
+  .admin-header-left { display: flex; align-items: center; gap: 14px; }
+  .admin-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px;
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.3);
+    border-radius: 999px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .admin-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px; font-weight: 700;
+  }
+  .admin-close {
+    background: none; border: none; color: var(--gray);
+    font-size: 24px; cursor: pointer; transition: color .2s;
+    line-height: 1;
+  }
+  .admin-close:hover { color: var(--white); }
+  .admin-tabs {
+    display: flex; gap: 4px; padding: 20px 36px 0;
+    border-bottom: 1px solid rgba(30,111,255,0.08);
+  }
+  .tab-btn {
+    padding: 10px 22px;
+    background: none; border: none; border-radius: 8px 8px 0 0;
+    color: var(--gray); font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all .2s;
+    border-bottom: 2px solid transparent;
+  }
+  .tab-btn.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+  .tab-btn:hover:not(.active) { color: var(--gray-light); }
+  .admin-body { padding: 32px 36px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Admin Cards */
+  .admin-section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px; font-weight: 600;
+    margin-bottom: 20px; color: var(--blue-bright);
+    letter-spacing: 1px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .admin-field { margin-bottom: 0; }
+  .admin-field label { display: block; font-size: 12px; font-weight: 600; color: var(--gray); margin-bottom: 6px; letter-spacing: .5px; }
+  .admin-field input, .admin-field textarea, .admin-field select {
+    width: 100%; padding: 11px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 13px;
+    transition: border-color .2s; outline: none; resize: vertical;
+  }
+  .admin-field input:focus, .admin-field textarea:focus, .admin-field select:focus { border-color: var(--blue); }
+  .admin-field select option { background: var(--navy-mid); }
+  .btn-save {
+    padding: 11px 28px;
+    background: linear-gradient(135deg, var(--blue), #0050CC);
+    border: none; border-radius: 8px;
+    color: var(--white); font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-save:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-danger {
+    padding: 11px 28px;
+    background: rgba(255,71,87,0.1);
+    border: 1px solid rgba(255,71,87,0.3);
+    border-radius: 8px;
+    color: var(--danger); font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-danger:hover { background: rgba(255,71,87,0.2); }
+  .btn-row { display: flex; gap: 12px; margin-top: 24px; align-items: center; }
+  .save-msg {
+    font-size: 12px; color: var(--success);
+    opacity: 0; transition: opacity .3s;
+  }
+  .save-msg.visible { opacity: 1; }
+
+  /* Program list in admin */
+  .program-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .program-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+  }
+  .program-row-icon { font-size: 20px; }
+  .program-row-info { flex: 1; }
+  .program-row-name { font-size: 14px; font-weight: 600; }
+  .program-row-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .program-row-actions { display: flex; gap: 8px; }
+  .btn-edit {
+    padding: 7px 16px;
+    background: rgba(30,111,255,0.1);
+    border: 1px solid rgba(30,111,255,0.25);
+    border-radius: 6px;
+    color: var(--blue-bright); font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
+  }
+  .btn-edit:hover { background: rgba(30,111,255,0.2); }
+  .btn-del {
+    padding: 7px 16px;
+    background: rgba(255,71,87,0.08);
+    border: 1px solid rgba(255,71,87,0.2);
+    border-radius: 6px;
+    color: var(--danger); font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
+  }
+  .btn-del:hover { background: rgba(255,71,87,0.18); }
+  .add-program-form {
+    background: rgba(30,111,255,0.04);
+    border: 1px dashed rgba(30,111,255,0.2);
+    border-radius: 12px; padding: 24px;
+    margin-top: 8px;
+  }
+  .add-program-form h4 { font-size: 13px; color: var(--blue-bright); margin-bottom: 16px; letter-spacing: .5px; }
+
+  /* Jalur admin */
+  .jalur-admin-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .jalur-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+  }
+  .jalur-row-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px; font-weight: 900; color: var(--blue);
+    min-width: 28px;
+  }
+  .jalur-row-info { flex: 1; }
+  .jalur-row-name { font-size: 14px; font-weight: 600; }
+  .jalur-row-desc { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+  /* Timeline admin */
+  .timeline-admin-list { display: flex; flex-direction: column; gap: 10px; }
+  .timeline-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+  }
+  .timeline-row-info { flex: 1; }
+  .timeline-row-title { font-size: 14px; font-weight: 600; }
+  .timeline-row-date { font-size: 12px; color: var(--gold); margin-top: 2px; }
+
+  /* Divider */
+  .admin-divider {
+    height: 1px; background: rgba(255,255,255,0.06);
+    margin: 32px 0;
+  }
+
+  /* Notification toast */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px;
+    background: var(--navy-light);
+    border: 1px solid rgba(0,200,150,0.3);
+    border-radius: 10px; padding: 14px 22px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; font-weight: 500;
+    z-index: 9999;
+    transform: translateY(100px); opacity: 0;
+    transition: all .3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { font-size: 16px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    #hero { padding: 90px 20px 60px; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .programs-grid { grid-template-columns: 1fr; }
+    .jalur-inner { grid-template-columns: 1fr; gap: 40px; }
+    .syarat-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; }
+    section { padding: 70px 20px; }
+    #stats { padding: 60px 20px; }
+    #cta { padding: 70px 20px; }
+    .admin-body { padding: 24px 20px; }
+    .admin-tabs { padding: 16px 20px 0; }
+    .admin-header { padding: 22px 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">M</div>
+    <div>
+      <div class="nav-title">SMK MUTIARA</div>
+      <div class="nav-sub">SPMB 2025/2026</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#jurusan">Jurusan</a>
+    <a href="#jalur">Jalur Masuk</a>
+    <a href="#syarat">Persyaratan</a>
+    <a href="#cta">Daftar Sekarang</a>
+    <button class="btn-admin-nav" onclick="openLogin()">⚙ Admin</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Pendaftaran Dibuka
+    </div>
+    <div class="hero-school" id="hero-school">SMK MUTIARA</div>
+    <h1 class="hero-title">Seleksi Penerimaan<br><span id="hero-tagline">Murid Baru</span></h1>
+    <p class="hero-desc" id="hero-desc">
+      Bergabunglah bersama ribuan siswa berprestasi di SMK Mutiara — sekolah kejuruan terdepan yang mencetak generasi terampil dan siap kerja.
+    </p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        Daftar Sekarang →
+      </button>
+      <button class="btn-outline" onclick="document.getElementById('jalur').scrollIntoView({behavior:'smooth'})">
+        Info Jalur Masuk
+      </button>
+    </div>
+    <div class="countdown-wrap">
+      <div class="countdown-label">Penutupan Pendaftaran</div>
+      <div class="countdown">
+        <div class="cd-unit"><div class="cd-num" id="cd-d">00</div><div class="cd-label">Hari</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Jam</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Menit</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Detik</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num" id="stat-alumni">2<span>K+</span></div>
+      <div class="stat-desc">Alumni Berprestasi</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-akreditasi"><span id="stat-akred-val">A</span></div>
+      <div class="stat-desc">Akreditasi BAN-S/M</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-industri">50<span>+</span></div>
+      <div class="stat-desc">Mitra Industri</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-tahun">15<span>+</span></div>
+      <div class="stat-desc">Tahun Pengalaman</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JURUSAN ══ -->
+<section id="jurusan">
+  <div class="jurusan-header">
+    <div class="section-label">Program Keahlian</div>
+    <h2 class="section-title">Pilih Jurusan<br>yang Tepat Untukmu</h2>
+    <p class="section-desc">Temukan program keahlian yang sesuai dengan minat dan bakat kamu untuk karir yang lebih cerah.</p>
+  </div>
+  <div class="programs-grid" id="programs-grid">
+    <!-- Rendered by JS -->
+  </div>
+</section>
+
+<!-- ══ JALUR ══ -->
+<section id="jalur">
+  <div class="jalur-inner">
+    <div>
+      <div class="section-label">Jalur Seleksi</div>
+      <h2 class="section-title">Pilih Jalur<br>Pendaftaranmu</h2>
+      <p class="section-desc">Tersedia beberapa jalur penerimaan sesuai dengan kemampuan dan prestasi kamu.</p>
+      <div class="jalur-list" id="jalur-list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:24px">Alur Pendaftaran</div>
+      <div class="jalur-visual" id="timeline-list">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PERSYARATAN ══ -->
+<section id="syarat">
+  <div class="syarat-inner">
+    <div class="section-label">Dokumen Wajib</div>
+    <h2 class="section-title">Persyaratan Pendaftaran</h2>
+    <p class="section-desc">Siapkan semua dokumen berikut sebelum melakukan pendaftaran untuk memperlancar proses seleksi.</p>
+    <div class="syarat-grid" id="syarat-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="section-label">Ayo Bergabung</div>
+    <h2 class="section-title" id="cta-title">Raih Masa Depanmu<br>Bersama Kami</h2>
+    <p class="section-desc" id="cta-desc">
+      Jangan lewatkan kesempatan menjadi bagian dari keluarga besar SMK Mutiara. Daftar sekarang sebelum kuota penuh!
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-primary" id="cta-btn">Mulai Pendaftaran →</button>
+      <button class="btn-outline" onclick="window.open('https://wa.me/', '_blank')">💬 Hubungi Kami</button>
+    </div>
+    <p style="margin-top:24px;font-size:12px;color:var(--gray)" id="cta-contact">
+      📞 (021) 123-4567 &nbsp;|&nbsp; ✉ spmb@smkmutiara.sch.id
+    </p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-school">SMK MUTIARA</div>
+    <div class="footer-address" id="footer-address">
+      Jl. Pendidikan No. 1, Kota Mutiara<br>
+      © 2025 SMK Mutiara. All rights reserved.
+    </div>
+  </div>
+  <div class="footer-right">
+    SPMB 2025/2026<br>
+    <span style="color:var(--blue-bright);cursor:pointer" onclick="openLogin()">Admin Login</span>
+  </div>
+</footer>
+
+<!-- ══ LOGIN MODAL ══ -->
+<div class="modal-overlay" id="loginModal">
+  <div class="login-box">
+    <button class="login-close" onclick="closeLogin()">×</button>
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Admin Login</div>
+    <div class="login-sub">Masuk untuk mengelola konten landing page</div>
+    <div class="field">
+      <label>USERNAME</label>
+      <input type="text" id="login-user" placeholder="admin" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>PASSWORD</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+    </div>
+    <button class="btn-login" onclick="doLogin()">Masuk ke Dashboard</button>
+    <div class="login-error" id="login-error">Username atau password salah!</div>
+    <p style="text-align:center;font-size:11px;color:var(--gray);margin-top:20px">
+      Demo: admin / admin123
+    </p>
+  </div>
+</div>
+
+<!-- ══ ADMIN PANEL MODAL ══ -->
+<div class="modal-overlay" id="adminModal">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <div class="admin-header-left">
+        <div class="admin-badge">⚙ Admin Panel</div>
+        <div class="admin-title">Kelola Landing Page</div>
+      </div>
+      <button class="admin-close" onclick="closeAdmin()">×</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="tab-btn active" onclick="switchTab('hero')">🏠 Hero</button>
+      <button class="tab-btn" onclick="switchTab('programs')">📚 Jurusan</button>
+      <button class="tab-btn" onclick="switchTab('jalur')">🚦 Jalur</button>
+      <button class="tab-btn" onclick="switchTab('timeline')">📅 Timeline</button>
+      <button class="tab-btn" onclick="switchTab('syarat')">📋 Persyaratan</button>
+      <button class="tab-btn" onclick="switchTab('cta')">📣 CTA & Kontak</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- TAB: HERO -->
+      <div class="tab-content active" id="tab-hero">
+        <div class="admin-section-title">✦ HERO SECTION</div>
+        <div class="form-grid">
+          <div class="admin-field">
+            <label>NAMA SEKOLAH</label>
+            <input type="text" id="f-school" placeholder="SMK MUTIARA">
+          </div>
+          <div class="admin-field">
+            <label>TAGLINE UTAMA</label>
+            <input type="text" id="f-tagline" placeholder="Murid Baru">
+          </div>
+          <div class="admin-field full">
+            <label>DESKRIPSI HERO</label>
+            <textarea id="f-desc" rows="3" placeholder="Deskripsi singkat sekolah..."></textarea>
+          </div>
+          <div class="admin-field">
+            <label>TANGGAL PENUTUPAN (Countdown)</label>
+            <input type="date" id="f-deadline">
+          </div>
+          <div class="admin-field">
+            <label>AKREDITASI</label>
+            <input type="text" id="f-akreditasi" placeholder="A">
+          </div>
+          <div class="admin-field">
+            <label>JUMLAH ALUMNI</label>
+            <input type="text" id="f-alumni" placeholder="2K+">
+          </div>
+          <div class="admin-field">
+            <label>MITRA INDUSTRI</label>
+            <input type="text" id="f-industri" placeholder="50+">
+          </div>
+          <div class="admin-field">
+            <label>TAHUN PENGALAMAN</label>
+            <input type="text" id="f-tahun" placeholder="15+">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-save" onclick="saveHero()">💾 Simpan Perubahan</button>
+          <span class="save-msg" id="hero-msg">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+      <!-- TAB: PROGRAMS -->
+      <div class="tab-content" id="tab-programs">
+        <div class="admin-section-title">✦ PROGRAM KEAHLIAN (JURUSAN)</div>
+        <div class="program-list" id="admin-program-list"></div>
+        <div class="add-program-form">
+          <h4>+ TAMBAH JURUSAN BARU</h4>
+          <div class="form-grid">
+            <div class="admin-field">
+              <label>ICON (Emoji)</label>
+              <input type="text" id="np-icon" placeholder="💻" maxlength="4">
+            </div>
+            <div class="admin-field">
+              <label>NAMA JURUSAN</label>
+              <input type="text" id="np-name" placeholder="Teknik Komputer & Jaringan">
+            </div>
+            <div class="admin-field full">
+              <label>DESKRIPSI</label>
+              <textarea id="np-desc" rows="2" placeholder="Deskripsi singkat jurusan..."></textarea>
+            </div>
+            <div class="admin-field">
+              <label>KUOTA SISWA</label>
+              <input type="number" id="np-quota" placeholder="72">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-save" onclick="addProgram()">+ Tambah Jurusan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: JALUR -->
+      <div class="tab-content" id="tab-jalur">
+        <div class="admin-section-title">✦ JALUR PENERIMAAN</div>
+        <div class="jalur-admin-list" id="admin-jalur-list"></div>
+        <div class="add-program-form">
+          <h4>+ TAMBAH JALUR BARU</h4>
+          <div class="form-grid">
+            <div class="admin-field">
+              <label>NAMA JALUR</label>
+              <input type="text" id="nj-name" placeholder="Jalur Prestasi">
+            </div>
+            <div class="admin-field full">
+              <label>DESKRIPSI</label>
+              <textarea id="nj-desc" rows="2" placeholder="Deskripsi jalur penerimaan..."></textarea>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-save" onclick="addJalur()">+ Tambah Jalur</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: TIMELINE -->
+      <div class="tab-content" id="tab-timeline">
+        <div class="admin-section-title">✦ ALUR PENDAFTARAN</div>
+        <div class="timeline-admin-list" id="admin-timeline-list"></div>
+        <div class="add-program-form" style="margin-top:16px">
+          <h4>+ TAMBAH TAHAP BARU</h4>
+          <div class="form-grid">
+            <div class="admin-field">
+              <label>NAMA TAHAP</label>
+              <input type="text" id="nt-title" placeholder="Pengumuman Hasil">
+            </div>
+            <div class="admin-field">
+              <label>TANGGAL</label>
+              <input type="text" id="nt-date" placeholder="15 Juli 2025">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-save" onclick="addTimeline()">+ Tambah Tahap</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PERSYARATAN -->
+      <div class="tab-content" id="tab-syarat">
+        <div class="admin-section-title">✦ PERSYARATAN PENDAFTARAN</div>
+        <div id="admin-syarat-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px"></div>
+        <div class="add-program-form">
+          <h4>+ TAMBAH PERSYARATAN</h4>
+          <div class="form-grid">
+            <div class="admin-field">
+              <label>ICON</label>
+              <input type="text" id="ns-icon" placeholder="📄" maxlength="4">
+            </div>
+            <div class="admin-field">
+              <label>DOKUMEN / PERSYARATAN</label>
+              <input type="text" id="ns-text" placeholder="Fotokopi Ijazah SMP/MTs">
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-save" onclick="addSyarat()">+ Tambah</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CTA & KONTAK -->
+      <div class="tab-content" id="tab-cta">
+        <div class="admin-section-title">✦ CTA & INFORMASI KONTAK</div>
+        <div class="form-grid">
+          <div class="admin-field">
+            <label>JUDUL CTA</label>
+            <input type="text" id="f-cta-title" placeholder="Raih Masa Depanmu Bersama Kami">
+          </div>
+          <div class="admin-field">
+            <label>TEKS TOMBOL</label>
+            <input type="text" id="f-cta-btn" placeholder="Mulai Pendaftaran →">
+          </div>
+          <div class="admin-field full">
+            <label>DESKRIPSI CTA</label>
+            <textarea id="f-cta-desc" rows="2"></textarea>
+          </div>
+          <div class="admin-field">
+            <label>NOMOR TELEPON</label>
+            <input type="text" id="f-phone" placeholder="(021) 123-4567">
+          </div>
+          <div class="admin-field">
+            <label>EMAIL</label>
+            <input type="text" id="f-email" placeholder="spmb@smkmutiara.sch.id">
+          </div>
+          <div class="admin-field full">
+            <label>ALAMAT FOOTER</label>
+            <input type="text" id="f-address" placeholder="Jl. Pendidikan No. 1, Kota Mutiara">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-save" onclick="saveCta()">💾 Simpan</button>
+          <span class="save-msg" id="cta-msg">✓ Tersimpan!</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toast-msg">Perubahan disimpan!</span>
+</div>
+
+<script>
+// ══ STATE ══
+const state = {
+  hero: {
+    school: 'SMK MUTIARA',
+    tagline: 'Murid Baru',
+    desc: 'Bergabunglah bersama ribuan siswa berprestasi di SMK Mutiara — sekolah kejuruan terdepan yang mencetak generasi terampil dan siap kerja.',
+    deadline: '2025-07-31',
+    akreditasi: 'A',
+    alumni: '2K+',
+    industri: '50+',
+    tahun: '15+',
+  },
+  programs: [
+    { id:1, icon:'💻', name:'Teknik Komputer & Jaringan', desc:'Mempelajari instalasi, konfigurasi, dan perawatan jaringan komputer serta keamanan siber.', quota:72 },
+    { id:2, icon:'⚡', name:'Teknik Instalasi Tenaga Listrik', desc:'Menguasai teknik instalasi listrik gedung dan industri sesuai standar nasional.', quota:72 },
+    { id:3, icon:'🎨', name:'Desain Komunikasi Visual', desc:'Mengembangkan kreativitas dalam desain grafis, fotografi, dan media digital.', quota:36 },
+    { id:4, icon:'🔧', name:'Teknik Pemesinan', desc:'Membekali siswa dengan keahlian operasi mesin bubut, frais, dan CNC modern.', quota:36 },
+    { id:5, icon:'🏥', name:'Asisten Keperawatan', desc:'Menyiapkan tenaga kesehatan terampil yang siap mendukung pelayanan medis profesional.', quota:36 },
+    { id:6, icon:'💼', name:'Otomatisasi & Tata Kelola Perkantoran', desc:'Menguasai administrasi bisnis, manajemen perkantoran, dan aplikasi komputer terkini.', quota:72 },
+  ],
+  jalur: [
+    { id:1, name:'Jalur Prestasi Akademik', desc:'Diperuntukkan bagi siswa dengan nilai rapor semester 1–5 rata-rata minimal 80.' },
+    { id:2, name:'Jalur Prestasi Non-Akademik', desc:'Bagi siswa berprestasi di bidang olahraga, seni, atau lomba tingkat kabupaten ke atas.' },
+    { id:3, name:'Jalur Reguler / Umum', desc:'Seleksi berdasarkan nilai UN dan tes potensi akademik yang diselenggarakan sekolah.' },
+    { id:4, name:'Jalur Afirmasi', desc:'Khusus bagi calon peserta didik dari keluarga tidak mampu dengan bukti KIP/PKH.' },
+  ],
+  timeline: [
+    { id:1, title:'Pendaftaran Online', date:'1 – 30 Juni 2025' },
+    { id:2, title:'Verifikasi Berkas', date:'1 – 5 Juli 2025' },
+    { id:3, title:'Tes Seleksi', date:'8 Juli 2025' },
+    { id:4, title:'Pengumuman Hasil', date:'15 Juli 2025' },
+    { id:5, title:'Daftar Ulang', date:'16 – 31 Juli 2025' },
+  ],
+  syarat: [
+    { id:1, icon:'📄', text:'Fotokopi Ijazah SMP/MTs (dilegalisir)' },
+    { id:2, icon:'📊', text:'Fotokopi SKHUN (dilegalisir)' },
+    { id:3, icon:'🪪', text:'Fotokopi Akta Kelahiran' },
+    { id:4, icon:'🏠', text:'Fotokopi Kartu Keluarga' },
+    { id:5, icon:'🖼', text:'Pas Foto 3×4 (6 lembar, background merah)' },
+    { id:6, icon:'💉', text:'Surat Keterangan Sehat dari Dokter' },
+    { id:7, icon:'📝', text:'Formulir Pendaftaran (download di website)' },
+    { id:8, icon:'🏆', text:'Sertifikat Prestasi (jika ada)' },
+  ],
+  cta: {
+    title: 'Raih Masa Depanmu\nBersama Kami',
+    btnText: 'Mulai Pendaftaran →',
+    desc: 'Jangan lewatkan kesempatan menjadi bagian dari keluarga besar SMK Mutiara. Daftar sekarang sebelum kuota penuh!',
+    phone: '(021) 123-4567',
+    email: 'spmb@smkmutiara.sch.id',
+    address: 'Jl. Pendidikan No. 1, Kota Mutiara',
+  }
+};
+let nextId = 100;
+
+// ══ RENDER ══
+function renderAll() {
+  renderHero();
+  renderPrograms();
+  renderJalur();
+  renderTimeline();
+  renderSyarat();
+  renderCta();
+}
+
+function renderHero() {
+  const h = state.hero;
+  document.getElementById('hero-school').textContent = h.school;
+  document.getElementById('hero-tagline').textContent = h.tagline;
+  document.getElementById('hero-desc').textContent = h.desc;
+  document.getElementById('stat-akred-val').textContent = h.akreditasi;
+  document.getElementById('stat-alumni').innerHTML = h.alumni + '';
+  document.getElementById('stat-industri').innerHTML = h.industri + '';
+  document.getElementById('stat-tahun').innerHTML = h.tahun + '';
+}
+
+function renderPrograms() {
+  const grid = document.getElementById('programs-grid');
+  grid.innerHTML = state.programs.map(p => `
+    <div class="program-card">
+      <div class="program-icon">${p.icon}</div>
+      <div class="program-name">${p.name}</div>
+      <div class="program-desc">${p.desc}</div>
+      <div class="program-quota">
+        <span class="program-quota-label">Kuota Siswa</span>
+        <span class="program-quota-num">${p.quota} Orang</span>
+      </div>
+    </div>
+  `).join('');
+
+  // Admin list
+  const al = document.getElementById('admin-program-list');
+  if(al) al.innerHTML = state.programs.map(p => `
+    <div class="program-row">
+      <div class="program-row-icon">${p.icon}</div>
+      <div class="program-row-info">
+        <div class="program-row-name">${p.name}</div>
+        <div class="program-row-desc">${p.desc.substring(0,60)}… | Kuota: ${p.quota}</div>
+      </div>
+      <div class="program-row-actions">
+        <button class="btn-del" onclick="deleteProgram(${p.id})">Hapus</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderJalur() {
+  const list = document.getElementById('jalur-list');
+  list.innerHTML = state.jalur.map((j,i) => `
+    <div class="jalur-item">
+      <div class="jalur-num">0${i+1}</div>
+      <div class="jalur-info">
+        <div class="jalur-name">${j.name}</div>
+        <div class="jalur-desc">${j.desc}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const al = document.getElementById('admin-jalur-list');
+  if(al) al.innerHTML = state.jalur.map((j,i) => `
+    <div class="jalur-row">
+      <div class="jalur-row-num">0${i+1}</div>
+      <div class="jalur-row-info">
+        <div class="jalur-row-name">${j.name}</div>
+        <div class="jalur-row-desc">${j.desc.substring(0,70)}…</div>
+      </div>
+      <div class="program-row-actions">
+        <button class="btn-del" onclick="deleteJalur(${j.id})">Hapus</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTimeline() {
+  const tl = document.getElementById('timeline-list');
+  tl.innerHTML = state.timeline.map(t => `
+    <div class="timeline-step">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">${t.title}</div>
+        <div class="timeline-date">${t.date}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const al = document.getElementById('admin-timeline-list');
+  if(al) al.innerHTML = state.timeline.map(t => `
+    <div class="timeline-row">
+      <div class="timeline-row-info">
+        <div class="timeline-row-title">${t.title}</div>
+        <div class="timeline-row-date">${t.date}</div>
+      </div>
+      <div class="program-row-actions">
+        <button class="btn-del" onclick="deleteTimeline(${t.id})">Hapus</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSyarat() {
+  const grid = document.getElementById('syarat-grid');
+  grid.innerHTML = state.syarat.map(s => `
+    <div class="syarat-item">
+      <div class="syarat-icon">${s.icon}</div>
+      <div class="syarat-text">${s.text}</div>
+    </div>
+  `).join('');
+
+  const al = document.getElementById('admin-syarat-list');
+  if(al) al.innerHTML = state.syarat.map(s => `
+    <div class="jalur-row">
+      <div class="jalur-row-num" style="font-size:20px;min-width:28px">${s.icon}</div>
+      <div class="jalur-row-info">
+        <div class="jalur-row-name">${s.text}</div>
+      </div>
+      <div class="program-row-actions">
+        <button class="btn-del" onclick="deleteSyarat(${s.id})">Hapus</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCta() {
+  const c = state.cta;
+  document.getElementById('cta-title').innerHTML = c.title.replace('\n','<br>');
+  document.getElementById('cta-btn').textContent = c.btnText;
+  document.getElementById('cta-desc').textContent = c.desc;
+  document.getElementById('cta-contact').innerHTML = `📞 ${c.phone} &nbsp;|&nbsp; ✉ ${c.email}`;
+  document.getElementById('footer-address').innerHTML = `${c.address}<br>© 2025 SMK Mutiara. All rights reserved.`;
+}
+
+// ══ SAVE ACTIONS ══
+function saveHero() {
+  state.hero.school   = document.getElementById('f-school').value || state.hero.school;
+  state.hero.tagline  = document.getElementById('f-tagline').value || state.hero.tagline;
+  state.hero.desc     = document.getElementById('f-desc').value || state.hero.desc;
+  state.hero.deadline = document.getElementById('f-deadline').value || state.hero.deadline;
+  state.hero.akreditasi = document.getElementById('f-akreditasi').value || state.hero.akreditasi;
+  state.hero.alumni   = document.getElementById('f-alumni').value || state.hero.alumni;
+  state.hero.industri = document.getElementById('f-industri').value || state.hero.industri;
+  state.hero.tahun    = document.getElementById('f-tahun').value || state.hero.tahun;
+  renderHero();
+  showSaveMsg('hero-msg');
+  showToast('Hero section diperbarui!');
+}
+
+function addProgram() {
+  const icon  = document.getElementById('np-icon').value.trim();
+  const name  = document.getElementById('np-name').value.trim();
+  const desc  = document.getElementById('np-desc').value.trim();
+  const quota = parseInt(document.getElementById('np-quota').value) || 36;
+  if(!name) { showToast('Nama jurusan wajib diisi!'); return; }
+  state.programs.push({ id: nextId++, icon: icon||'📚', name, desc, quota });
+  document.getElementById('np-icon').value='';
+  document.getElementById('np-name').value='';
+  document.getElementById('np-desc').value='';
+  document.getElementById('np-quota').value='';
+  renderPrograms();
+  showToast('Jurusan berhasil ditambahkan!');
+}
+
+function deleteProgram(id) {
+  state.programs = state.programs.filter(p=>p.id!==id);
+  renderPrograms();
+  showToast('Jurusan dihapus!');
+}
+
+function addJalur() {
+  const name = document.getElementById('nj-name').value.trim();
+  const desc = document.getElementById('nj-desc').value.trim();
+  if(!name) { showToast('Nama jalur wajib diisi!'); return; }
+  state.jalur.push({ id: nextId++, name, desc });
+  document.getElementById('nj-name').value='';
+  document.getElementById('nj-desc').value='';
+  renderJalur();
+  showToast('Jalur berhasil ditambahkan!');
+}
+
+function deleteJalur(id) {
+  state.jalur = state.jalur.filter(j=>j.id!==id);
+  renderJalur();
+  showToast('Jalur dihapus!');
+}
+
+function addTimeline() {
+  const title = document.getElementById('nt-title').value.trim();
+  const date  = document.getElementById('nt-date').value.trim();
+  if(!title) { showToast('Nama tahap wajib diisi!'); return; }
+  state.timeline.push({ id: nextId++, title, date });
+  document.getElementById('nt-title').value='';
+  document.getElementById('nt-date').value='';
+  renderTimeline();
+  showToast('Tahap ditambahkan!');
+}
+
+function deleteTimeline(id) {
+  state.timeline = state.timeline.filter(t=>t.id!==id);
+  renderTimeline();
+  showToast('Tahap dihapus!');
+}
+
+function addSyarat() {
+  const icon = document.getElementById('ns-icon').value.trim();
+  const text = document.getElementById('ns-text').value.trim();
+  if(!text) { showToast('Isi persyaratan wajib diisi!'); return; }
+  state.syarat.push({ id: nextId++, icon: icon||'📄', text });
+  document.getElementById('ns-icon').value='';
+  document.getElementById('ns-text').value='';
+  renderSyarat();
+  showToast('Persyaratan ditambahkan!');
+}
+
+function deleteSyarat(id) {
+  state.syarat = state.syarat.filter(s=>s.id!==id);
+  renderSyarat();
+  showToast('Persyaratan dihapus!');
+}
+
+function saveCta() {
+  state.cta.title   = document.getElementById('f-cta-title').value || state.cta.title;
+  state.cta.btnText = document.getElementById('f-cta-btn').value || state.cta.btnText;
+  state.cta.desc    = document.getElementById('f-cta-desc').value || state.cta.desc;
+  state.cta.phone   = document.getElementById('f-phone').value || state.cta.phone;
+  state.cta.email   = document.getElementById('f-email').value || state.cta.email;
+  state.cta.address = document.getElementById('f-address').value || state.cta.address;
+  renderCta();
+  showSaveMsg('cta-msg');
+  showToast('CTA & Kontak diperbarui!');
+}
+
+// ══ TAB SWITCH ══
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+
+  // Populate form fields
+  if(name==='hero') {
+    document.getElementById('f-school').value = state.hero.school;
+    document.getElementById('f-tagline').value = state.hero.tagline;
+    document.getElementById('f-desc').value = state.hero.desc;
+    document.getElementById('f-deadline').value = state.hero.deadline;
+    document.getElementById('f-akreditasi').value = state.hero.akreditasi;
+    document.getElementById('f-alumni').value = state.hero.alumni;
+    document.getElementById('f-industri').value = state.hero.industri;
+    document.getElementById('f-tahun').value = state.hero.tahun;
+  }
+  if(name==='cta') {
+    document.getElementById('f-cta-title').value = state.cta.title;
+    document.getElementById('f-cta-btn').value = state.cta.btnText;
+    document.getElementById('f-cta-desc').value = state.cta.desc;
+    document.getElementById('f-phone').value = state.cta.phone;
+    document.getElementById('f-email').value = state.cta.email;
+    document.getElementById('f-address').value = state.cta.address;
+  }
+  if(name==='programs') renderPrograms();
+  if(name==='jalur') renderJalur();
+  if(name==='timeline') renderTimeline();
+  if(name==='syarat') renderSyarat();
+}
+
+// ══ MODALS ══
+function openLogin() {
+  document.getElementById('loginModal').classList.add('active');
+  setTimeout(()=>document.getElementById('login-user').focus(), 100);
+}
+function closeLogin() {
+  document.getElementById('loginModal').classList.remove('active');
+  document.getElementById('login-error').style.display='none';
+}
+function doLogin() {
+  const u = document.getElementById('login-user').value;
+  const p = document.getElementById('login-pass').value;
+  if(u==='admin' && p==='admin123') {
+    closeLogin();
+    openAdmin();
+  } else {
+    document.getElementById('login-error').style.display='block';
+    document.getElementById('login-pass').value='';
+    document.getElementById('login-pass').focus();
+  }
+}
+document.getElementById('login-pass').addEventListener('keydown', e=>{
+  if(e.key==='Enter') doLogin();
+});
+
+function openAdmin() {
+  document.getElementById('adminModal').classList.add('active');
+  // Pre-fill hero tab
+  document.getElementById('f-school').value = state.hero.school;
+  document.getElementById('f-tagline').value = state.hero.tagline;
+  document.getElementById('f-desc').value = state.hero.desc;
+  document.getElementById('f-deadline').value = state.hero.deadline;
+  document.getElementById('f-akreditasi').value = state.hero.akreditasi;
+  document.getElementById('f-alumni').value = state.hero.alumni;
+  document.getElementById('f-industri').value = state.hero.industri;
+  document.getElementById('f-tahun').value = state.hero.tahun;
+}
+function closeAdmin() {
+  document.getElementById('adminModal').classList.remove('active');
+}
+
+// ══ TOAST ══
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+function showSaveMsg(id) {
+  const el = document.getElementById(id);
+  el.classList.add('visible');
+  setTimeout(()=>el.classList.remove('visible'), 2000);
+}
+
+// ══ COUNTDOWN ══
+function updateCountdown() {
+  const deadline = new Date(state.hero.deadline + 'T23:59:59');
+  const now = new Date();
+  const diff = deadline - now;
+  if(diff <= 0) {
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');
+    return;
+  }
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor((diff%86400000)/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ══ PARTICLES ══
+function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#1E6FFF','#4D91FF','#FFD700','#00C896'];
+  for(let i=0; i<28; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*4+2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${Math.random()*10+8}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+// ══ SCROLL NAV ══
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.padding = window.scrollY > 40 ? '12px 48px' : '18px 48px';
+});
+
+// ══ INIT ══
+renderAll();
+</script>
+</body>
+</html>
